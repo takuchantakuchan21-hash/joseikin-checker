@@ -23,6 +23,8 @@
       linear-gradient(180deg,#fbfcff 0%,#f2f5fb 52%,#edf2fa 100%); background-attachment:fixed; min-height:100vh;
     color:var(--ink); line-height:1.75; -webkit-font-smoothing:antialiased; font-feature-settings:"palt";}
   button,select,input{touch-action:manipulation}
+  [hidden]{display:none!important}
+  fieldset{min-width:0;margin-left:0;margin-right:0}
   .wrap{max-width:720px; margin:0 auto; padding:0 24px 88px;}
   header{display:flex;align-items:center;justify-content:space-between;padding:26px 2px 4px;}
   .brand{font-weight:900; font-size:17px; color:var(--navy); letter-spacing:-.02em;}
@@ -58,11 +60,15 @@
   .form-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line)}
   .form-kicker{font-size:11px;font-weight:900;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
   .form-title{font-size:22px;line-height:1.45;font-weight:900;color:var(--navy);letter-spacing:-.02em}
-  .form-step{flex:none;font-size:11px;font-weight:800;color:var(--sub);background:var(--soft);border-radius:999px;padding:6px 10px}
+  .form-step{flex:none;font-size:12px;font-weight:900;color:var(--navy);background:var(--blue-soft);border-radius:999px;padding:7px 11px}
+  .form-sub{font-size:13px;color:var(--sub);line-height:1.65;margin-top:5px}
+  .privacy-note{display:flex;align-items:flex-start;gap:8px;margin:0 0 14px;padding:11px 13px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:13px;color:var(--sub);line-height:1.55}
+  .privacy-note::before{content:"";flex:none;width:8px;height:5px;margin-top:5px;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg)}
   .q{margin-bottom:14px;padding:20px;background:#fff;border:1px solid var(--line);border-radius:16px;transition:border-color .2s,box-shadow .2s;}
   .q:focus-within{border-color:#b9caf3;box-shadow:0 10px 24px -22px rgba(18,58,143,.7)}
+  .q.has-error{border-color:var(--red);box-shadow:0 0 0 3px rgba(208,70,59,.1)}
   .q:last-of-type{margin-bottom:6px;}
-  .q .qlabel{font-weight:900; font-size:15px; color:var(--navy); margin-bottom:12px;line-height:1.55;}
+  .q .qlabel{display:block;width:100%;padding:0;font-weight:900; font-size:15px; color:var(--navy); margin-bottom:12px;line-height:1.55;}
   .q .qhint{display:block; font-weight:400; color:var(--sub); font-size:12.5px; margin-top:3px; line-height:1.6;}
   .opts{display:flex; flex-wrap:wrap; gap:8px;}
   .opt{position:relative;border:1.5px solid #dce3ef; background:var(--field); color:#46536a; font-family:inherit; font-size:14px; font-weight:800;
@@ -79,11 +85,16 @@
   .unit{color:var(--sub); font-size:14px; font-weight:600;}
   select{width:100%; font-size:16px; padding:11px 14px; border:1.5px solid var(--line); border-radius:12px; background:var(--field) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235b6675' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>") no-repeat right 13px center; -webkit-appearance:none; appearance:none; color:var(--ink); font-family:inherit; cursor:pointer;}
   .err{color:var(--red); font-size:13px; margin-top:10px; display:none; font-weight:700;}
+  .calc-area{margin-top:12px;padding-top:14px;border-top:1px solid var(--line)}
+  .btn:disabled{cursor:not-allowed;background:#aab7cf;box-shadow:none;transform:none}
+  .flow-note{font-size:12.5px;color:var(--sub);text-align:center;margin-top:9px}
   /* result */
   #result{display:none;}
+  #result:focus{outline:none}
+  #resultTitle:focus{outline:none}
   .signal{position:relative; background:var(--card); border:1px solid var(--line); border-radius:20px; padding:24px 26px 24px 30px; margin-bottom:16px; box-shadow:var(--sh-sm); overflow:hidden;}
   .signal::before{content:''; position:absolute; left:0; top:0; bottom:0; width:7px; background:var(--sigc);}
-  .signal strong{display:block; font-size:20px; font-weight:800; line-height:1.3; color:var(--sigc);}
+  .signal h2{display:block; margin:0;font-size:20px; font-weight:900; line-height:1.35; color:var(--sigc);}
   .signal span{font-size:13.5px; color:var(--sub); line-height:1.6; margin-top:3px; display:block;}
   .sig-green{--sigc:var(--green);} .sig-amber{--sigc:var(--amber);} .sig-red{--sigc:var(--red);}
   .amountcard{background:var(--navy); color:#fff; border-radius:20px; padding:24px 26px; margin-bottom:16px; box-shadow:var(--sh-navy);}
@@ -99,6 +110,20 @@
   .block li b{color:var(--navy);}
   .ng{border-left:6px solid var(--amber);}
   .steps{border-left:6px solid var(--blue);}
+  .result-next{background:var(--blue-soft);border:1px solid #cbd9fb;border-radius:16px;padding:18px 20px;margin-bottom:16px}
+  .result-next .next-label{font-size:11px;font-weight:900;letter-spacing:.08em;color:var(--blue);margin-bottom:4px}
+  .result-next strong{display:block;color:var(--navy);font-size:15px;line-height:1.65}
+  details.result-detail{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:12px;box-shadow:var(--sh-sm);overflow:hidden}
+  details.result-detail summary{position:relative;list-style:none;cursor:pointer;padding:17px 48px 17px 20px;color:var(--navy);font-size:14px;font-weight:900;line-height:1.5}
+  details.result-detail summary::-webkit-details-marker{display:none}
+  details.result-detail summary::after{content:"";position:absolute;right:21px;top:50%;width:7px;height:7px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:translateY(-65%) rotate(45deg);transition:transform .15s}
+  details.result-detail[open] summary::after{transform:translateY(-35%) rotate(225deg)}
+  details.result-detail .detail-body{padding:0 20px 20px}
+  details.result-detail .detail-body ul,details.result-detail .detail-body ol{margin:0;padding-left:21px}
+  details.result-detail .detail-body li{font-size:14px;line-height:1.75;margin-bottom:9px}
+  details.result-detail.ng-detail{border-left:6px solid var(--amber)}
+  details.result-detail.steps-detail{border-left:6px solid var(--blue)}
+  details.result-detail.grants-detail{border-left:6px solid var(--navy)}
   .expert{background:var(--soft); border:1px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
   .expert h3{margin:0 0 6px; font-size:15px; font-weight:800; color:var(--navy);}
   .expert p{margin:0; font-size:13.5px; color:var(--sub); line-height:1.75;}
@@ -111,6 +136,7 @@
   .grantlist{display:flex; flex-direction:column; gap:10px;}
   .grant{display:block; text-decoration:none; color:inherit; border:1px solid var(--line); border-radius:14px; padding:14px 16px; background:var(--field); transition:.15s;}
   .grant:hover{border-color:var(--blue); background:var(--blue-soft);}
+  .grant:focus-visible,.src a:focus-visible{outline:3px solid rgba(47,107,255,.3);outline-offset:3px}
   .grant .gtag{display:inline-block; font-size:11px; font-weight:800; color:var(--blue); background:var(--blue-soft); border-radius:999px; padding:3px 11px; margin-bottom:8px;}
   .grant .gname{font-weight:800; color:var(--navy); font-size:15px;}
   .grant .garrow{color:var(--blue); font-size:12px; font-weight:800;}
@@ -124,9 +150,9 @@
     .hero{padding:32px 20px 26px;margin-top:10px;border-radius:22px}.hero h1{font-size:31px}.hero p{font-size:14px;line-height:1.85}
     .hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}.btn{font-size:16px;min-height:56px}.lp-block{padding:20px}
     .card{padding:16px;border-radius:20px}.form-intro{align-items:flex-start;padding:4px 2px 18px;margin-bottom:16px}.form-title{font-size:19px}.form-step{margin-top:2px}
-    .freshbar{font-size:11.5px;padding:11px 12px}.q{padding:17px 14px;margin-bottom:11px}.q .qlabel{font-size:14.5px}.q .qhint{font-size:12px}
+    .freshbar{font-size:13px;padding:12px}.q{padding:17px 14px;margin-bottom:11px}.q .qlabel{font-size:15px}.q .qhint{font-size:13px}
     .opts{display:grid;grid-template-columns:1fr}.opt{width:100%;text-align:left;font-size:13.5px;min-height:48px}.subq{padding:15px 12px}
-    .signal,.amountcard,.block,.expert{padding:20px}.amountcard .amt{font-size:27px}
+    .signal,.amountcard,.block,.expert{padding:20px}.amountcard .amt{font-size:27px}.foot,.src{font-size:12.5px}.form-step{font-size:11.5px}.privacy-note{font-size:12.5px}
   }
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
@@ -140,7 +166,7 @@
     <div class="eyebrow">取れたはずのお金、毎年そのまま通り過ぎていませんか？</div>
     <h1>その助成金、<em>うちは"いける"？</em></h1>
     <p>非正規スタッフの正社員化など、<b>"どうせやること"に助成金を乗せるだけ</b>。国から1人最大80万円＋加算（中小）の制度も。<b>かんたんな質問で、うちのサロンで"今"使える可能性がわかります。</b></p>
-    <div class="hero-proof"><span>3つの質問を選ぶだけ</span><span>入力内容は保存しません</span><span>公式情報に基づく目安</span></div>
+    <div class="hero-proof"><span>基本3項目・条件により追加確認</span><span>入力内容は保存しません</span><span>公式情報に基づく目安</span></div>
     <button type="button" class="btn" id="skipToCalc" style="margin-top:22px"><span class="btn-icon" aria-hidden="true"></span>すぐに診断する</button>
     <button type="button" class="toggle" id="lpToggle" style="margin-top:11px">そもそもどんな助成金？（30秒で読む）</button>
   </div>
@@ -161,11 +187,12 @@
   </div>
 
   <!-- INPUT -->
-  <div class="card" id="inputCard">
-    <div class="form-intro"><div><div class="form-kicker">Quick check</div><div class="form-title">まずは、3つの質問を選んでください</div></div><div class="form-step">選択式</div></div>
+  <div class="card" id="inputCard" tabindex="-1">
+    <div class="form-intro"><div><div class="form-kicker">Quick check</div><div class="form-title">基本3項目を、順番に選んでください</div><div class="form-sub">回答に合わせて、必要な項目だけ表示します。</div></div><div class="form-step" id="progressText" aria-live="polite">0 / 3 回答済み</div></div>
     <div class="freshbar">この診断は<b>厚生労働省「令和8年度版」</b>の公式情報に基づく<b>目安</b>です。金額・要件は改正されるため、最新は公式でご確認ください。可否や金額を確定するものではありません。</div>
-    <div class="q">
-      <div class="qlabel">Q1. 今、雇用保険に入っているスタッフはいますか？<span class="qhint">社員・パート・アルバイト問わず。給与から雇用保険料を引いていれば加入しています（週20時間以上＋31日以上働く見込みなら通常は加入。昼間学生は原則対象外）。</span></div>
+    <div class="privacy-note">氏名・連絡先の入力はありません。回答は保存・送信されません。</div>
+    <fieldset class="q" id="qEmploy">
+      <legend class="qlabel">Q1. 今、雇用保険に入っているスタッフはいますか？<span class="qhint">社員・パート・アルバイト問わず。給与から雇用保険料を引いていれば加入しています（週20時間以上＋31日以上働く見込みなら通常は加入。昼間学生は原則対象外）。</span></legend>
       <div class="opts" data-q="employ">
         <button type="button" class="opt" data-v="yes">いる</button>
         <button type="button" class="opt" data-v="soon">これから雇う</button>
@@ -173,10 +200,10 @@
         <button type="button" class="opt" data-v="family">夫婦・家族だけ（専従者）</button>
         <button type="button" class="opt" data-v="none">業務委託・面貸しだけ（雇用なし）</button>
       </div>
-    </div>
+    </fieldset>
 
-    <div class="q">
-      <div class="qlabel">Q2. 正社員にできそうな非正規スタッフ（契約社員・パート等）は？<span class="qhint">今いる、これから採る、いない のどれか。</span></div>
+    <fieldset class="q" id="qTarget" hidden>
+      <legend class="qlabel">Q2. 正社員にできそうな非正規スタッフ（契約社員・パート等）は？<span class="qhint">今いる、これから採る、いない のどれか。</span></legend>
       <div class="opts" data-q="target">
         <button type="button" class="opt" data-v="have">今いる</button>
         <button type="button" class="opt" data-v="future">これから採る予定</button>
@@ -196,31 +223,33 @@
           <button type="button" class="opt" data-v="unknown">わからない</button>
         </div>
       </div>
-    </div>
+    </fieldset>
 
-    <div class="q" id="countWrap" style="display:none">
-      <div class="qlabel">正社員にする予定は、何人ですか？<span class="qhint">だいたいでOK（1年度で最大20人まで／店舗＝事業所ごと）。複数いれば、その人数ぶんの目安も出します。</span></div>
-      <div class="inputrow"><input type="number" id="count" min="1" max="20" value="1" inputmode="numeric"><span class="unit">人</span></div>
-    </div>
+    <fieldset class="q" id="countWrap" hidden>
+      <legend class="qlabel">正社員にする予定は、何人ですか？<span class="qhint">だいたいでOK（1年度で最大20人まで／店舗＝事業所ごと）。複数いれば、その人数ぶんの目安も出します。</span></legend>
+      <div class="inputrow"><input type="number" id="count" min="1" max="20" value="1" inputmode="numeric" aria-label="正社員にする予定の人数"><span class="unit">人</span></div>
+    </fieldset>
 
-    <div class="q">
-      <div class="qlabel">Q3. 就業規則に「パート等を正社員に変える」ルールはありますか？<span class="qhint">なくても大丈夫（むしろ新しく作ると加算がつくことがあります）。分からなければ「ない・わからない」でOK。</span></div>
+    <fieldset class="q" id="qRule" hidden>
+      <legend class="qlabel">Q3. 就業規則に「パート等を正社員に変える」ルールはありますか？<span class="qhint">なくても大丈夫（むしろ新しく作ると加算がつくことがあります）。分からなければ「ない・わからない」でOK。</span></legend>
       <div class="opts" data-q="rule">
         <button type="button" class="opt" data-v="have">ある</button>
         <button type="button" class="opt" data-v="none">ない・わからない</button>
       </div>
-    </div>
+    </fieldset>
 
     <div class="err" id="err" role="alert" aria-live="polite"></div>
-    <div style="height:8px"></div>
-    <button class="btn" id="calc">可能性を見る</button>
+    <div class="calc-area" id="calcArea" hidden>
+      <button class="btn" id="calc" disabled>可能性を見る</button>
+      <div class="flow-note" id="flowNote">必要な項目を選ぶと結果を見られます。</div>
+    </div>
   </div>
 
   <button type="button" id="grantsToggle" class="browse-toggle">＋ ほかの助成金・補助金も見る<br><span style="font-weight:600;font-size:12px;color:var(--sub)">採用・賃上げ・育成・産休育休・集客・デジタル化 の困りごと別に</span></button>
   <div id="grantsBrowse"></div>
   </div>
 
-  <div id="result"></div>
+  <div id="result" role="region" aria-labelledby="resultTitle" tabindex="-1"></div>
 </div>
 
 <script>
@@ -229,6 +258,30 @@
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
   var yen=function(n){return Math.round(n).toLocaleString('ja-JP');};
   var ans={};
+
+  function isEarlyResult(){ return ['solo','family','none'].indexOf(ans.employ)!==-1; }
+  function setHidden(el,hidden){ if(el) el.hidden=!!hidden; }
+  function clearQuestionErrors(){ $$('.q.has-error').forEach(function(q){q.classList.remove('has-error');}); }
+  function updateFlow(){
+    var early=isEarlyResult();
+    var hasEmploy=!!ans.employ;
+    var hasTarget=!!ans.target;
+    var isHave=ans.target==='have';
+    var showCount=ans.target==='have'||ans.target==='future';
+    var requiredDone=!isHave||!!ans.done;
+    var complete=early||(hasEmploy&&hasTarget&&!!ans.rule&&requiredDone);
+    var answered=[ans.employ,ans.target,ans.rule].filter(Boolean).length;
+
+    setHidden($('#qTarget'),!hasEmploy||early);
+    $('#subTarget').classList.toggle('on',hasEmploy&&!early&&isHave);
+    setHidden($('#countWrap'),!hasEmploy||early||!showCount);
+    setHidden($('#qRule'),!hasEmploy||early||!hasTarget);
+    setHidden($('#calcArea'),!hasEmploy);
+    $('#calc').disabled=!complete;
+    $('#calc').textContent=early?'この回答で結果を見る':'可能性を見る';
+    $('#flowNote').textContent=complete?'入力できました。結果を確認できます。':'必要な項目を選ぶと結果を見られます。';
+    $('#progressText').textContent=early?'入力完了':Math.min(answered,3)+' / 3 回答済み'+(isHave?'・追加確認 '+[ans.done,ans.term].filter(Boolean).length+' / 2':'');
+  }
 
   // LP toggle
   $('#lpToggle').setAttribute('aria-expanded','false');
@@ -249,21 +302,22 @@
     $$('.opt',grp).forEach(function(b){
       b.setAttribute('aria-pressed','false');
       b.addEventListener('click',function(){
+        clearQuestionErrors();
         $$('.opt',grp).forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false');});
         b.classList.add('on'); b.setAttribute('aria-pressed','true'); ans[key]=b.getAttribute('data-v');
         $('#err').style.display='none';
         if(key==='target'){
           // 対象を選び直したら、古いサブ回答（もう正社員にした/契約/勤続）をリセット（金額の誤りを防ぐ）
           delete ans.done; delete ans.term; delete ans.years;
-          $$('#subTarget .opt').forEach(function(x){x.classList.remove('on');});
+          $$('#subTarget .opt').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false');});
           var isHave = ans.target==='have';
-          $('#subTarget').classList.toggle('on', isHave);
-          $('#countWrap').style.display = (ans.target==='have'||ans.target==='future') ? 'block' : 'none';
           if(isHave){ setTimeout(function(){ $('#subTarget').scrollIntoView({behavior:'smooth',block:'nearest'}); }, 40); }
         }
+        updateFlow();
       });
     });
   });
+  updateFlow();
 
   function money(str){ return str; }
 
@@ -409,9 +463,9 @@
   }
   function renderGrants(){
     var opts='<option value="">選んでください</option>'+PREF.map(function(p){return '<option>'+p+'</option>';}).join('');
-    var region='<div style="background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px">'
-      +'<div style="font-weight:800;font-size:13.5px;color:var(--navy);margin-bottom:8px">お住まいの地域（都道府県）でも探せます（任意）</div>'
-      +'<select class="prefSel">'+opts+'</select>'
+    var region='<div class="pref-box" style="background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px">'
+      +'<label style="display:block;font-weight:800;font-size:13.5px;color:var(--navy);margin-bottom:8px">お住まいの地域（都道府県）でも探せます（任意）'
+      +'<select class="prefSel" style="margin-top:8px">'+opts+'</select></label>'
       +'<div class="prefOut"></div></div>';
     var cards=STGRANTS.map(function(g){
       return '<a class="grant" href="'+g.u+'" target="_blank" rel="noopener"><div class="gtag">'+g.t+'</div><div class="gname">'+g.n+' <span class="garrow">公式サイト↗</span></div><div class="gdesc">'+g.d+'</div><div class="gfor">向く店：'+g.f+'</div></a>';
@@ -425,7 +479,8 @@
   document.addEventListener('change',function(ev){
     var s=ev.target;
     if(s&&s.classList&&s.classList.contains('prefSel')){
-      var out=s.parentElement.querySelector('.prefOut');
+      var box=s.closest('.pref-box');
+      var out=box&&box.querySelector('.prefOut');
       if(out) out.innerHTML=prefBlock(s.value);
     }
   });
@@ -448,7 +503,7 @@
     return '';
   }
   function render(r){
-    var h=staleWarn()+'<div class="signal sig-'+r.sig+'"><strong>'+r.title+'</strong><span>'+r.sub+'</span></div>';
+    var h=staleWarn()+'<div class="signal sig-'+r.sig+'"><h2 id="resultTitle" tabindex="-1">'+r.title+'</h2><span>'+r.sub+'</span></div>';
     if(r.why){
       h+='<div style="font-size:13px;color:var(--sub);background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:16px;line-height:1.7"><b style="color:var(--navy)">この判定の理由：</b>'+r.why+'</div>';
     }
@@ -458,32 +513,50 @@
         +'<div class="amtnote">'+r.amount.note+'</div></div>';
       h+='<div style="font-size:13px;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-bottom:16px;line-height:1.7">※ 助成金は<b style="color:var(--navy)">後払い・原則一度きり</b>です（正社員化して給与を6か月ほど払った"あと"に入ります）。要件の<b style="color:var(--navy)">賃金3%増は"続くコスト"</b>です（昇給は毎月・助成金は一度）。だから<b style="color:var(--navy)">"どうせ正社員化する予定"の人に乗せる</b>のが基本です（新しい設備投資などは不要。ただし昇給ぶんのコストは続きます）。<br>※ 実際の受給には、要件を満たした証拠と実地調査への対応が必要です。</div>';
     }
+    if(r.steps){
+      h+='<div class="result-next"><div class="next-label">まず最初にやること</div><strong>'+r.steps[0]+'</strong></div>';
+    }
     if(r.ng){
-      h+='<div class="block ng"><h3>'+(r.ngTitle||'ここを外すと0円（注意点）')+'</h3><ul>'+r.ng.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div>';
+      h+='<details class="result-detail ng-detail"><summary>'+(r.ngTitle||'ここを外すと0円（注意点）')+'（'+r.ng.length+'項目）</summary><div class="detail-body"><ul>'+r.ng.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div></details>';
     }
     if(r.steps){
-      h+='<div class="block steps"><h3>今から整える順番</h3><ol>'+r.steps.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ol></div>';
+      h+='<details class="result-detail steps-detail"><summary>今から整える順番（'+r.steps.length+'ステップ）</summary><div class="detail-body"><ol>'+r.steps.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ol></div></details>';
     }
     h+='<div class="expert"><h3>次の一歩：要件を専門家に確認</h3><p>'+r.expert+' airchairでは、提携の社労士に「うちは要件を満たせるか」「NGを踏んでいないか」を確認できます（<b>相談したい方だけ</b>・無理な売り込みはしません）。</p></div>';
     if(r.grantsIntro){ h+='<div style="font-size:13px;color:var(--navy);font-weight:700;margin:0 2px 8px">'+r.grantsIntro+'</div>'; }
-    h+=renderGrants();
+    h+='<details class="result-detail grants-detail"><summary>ほかの助成金・補助金も見る</summary><div class="detail-body">'+renderGrants()+'</div></details>';
     h+='<div class="cta"><button class="btn secondary" id="backBtn">質問に戻る</button></div>';
     h+='<div class="foot">※ これは可能性の目安です。受給できるかどうかを確定するものではありません。可否・金額は要件確認が必要です。</div>';
     h+='<div class="src">出典：<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/part_haken/jigyounushi/career.html" target="_blank" rel="noopener">厚生労働省「キャリアアップ助成金のご案内（令和8年度版）」↗</a>（令和8年4月8日現在）／情報の最終確認日：2026-08-17。制度は改正されることがあります。<br>airchair</div>';
     $('#result').innerHTML=h;
     $('#result').style.display='block';
     $('#topArea').style.display='none';
-    window.scrollTo({top:0,behavior:'smooth'});
+    window.scrollTo({top:0,behavior:'auto'});
+    requestAnimationFrame(function(){ var t=$('#resultTitle'); if(t) t.focus({preventScroll:true}); });
     $('#backBtn').addEventListener('click',function(){
-      $('#result').style.display='none'; $('#topArea').style.display='block'; window.scrollTo({top:0,behavior:'smooth'});
+      $('#result').style.display='none'; $('#topArea').style.display='block';
+      requestAnimationFrame(function(){ $('#inputCard').scrollIntoView({behavior:'smooth',block:'start'}); $('#inputCard').focus({preventScroll:true}); });
     });
+  }
+
+  function focusFirstMissing(){
+    var q=null;
+    if(!ans.employ) q=$('#qEmploy');
+    else if(!isEarlyResult()&&!ans.target) q=$('#qTarget');
+    else if(ans.target==='have'&&!ans.done) q=$('#qTarget');
+    else if(!isEarlyResult()&&!ans.rule) q=$('#qRule');
+    if(!q) return;
+    q.classList.add('has-error');
+    q.scrollIntoView({behavior:'smooth',block:'center'});
+    var target=$('button,input',q);
+    if(target) setTimeout(function(){target.focus({preventScroll:true});},180);
   }
 
   // 入力画面にも鮮度警告を出す（診断せず離脱する人にも「要再確認」を届ける・G8）
   (function(){ var w=staleWarn(); if(w){ var ic=$('#inputCard'); if(ic) ic.insertAdjacentHTML('afterbegin', w); } })();
 
   $('#calc').addEventListener('click',function(){
-    var r=diagnose(); if(r) render(r);
+    var r=diagnose(); if(r) render(r); else focusFirstMissing();
   });
 })();
 </script>
