@@ -91,6 +91,8 @@
   .advice-item p{margin:0;color:var(--ink);font-size:12.5px;line-height:1.7}
   .advice-script{grid-column:1/-1;background:#fff;border-left:4px solid var(--blue)}
   .advice-script p{color:var(--navy);font-weight:700}
+  .candidate-section{margin-top:16px;padding-top:16px;border-top:1px solid #cbd9fb}
+  .candidate-label{margin:0 0 9px;color:var(--navy);font-size:13px;font-weight:900}
   .purpose-actions{display:flex;gap:9px;margin-top:14px}
   .purpose-actions .btn{min-height:50px;font-size:14px;padding:12px 16px}
   .q{margin-bottom:14px;padding:20px;background:#fff;border:1px solid var(--line);border-radius:16px;transition:border-color .2s,box-shadow .2s;}
@@ -571,7 +573,7 @@
   function renderAdvice(key){
     var a=PURPOSE_ADVICE[key]; if(!a) return '';
     return '<section class="advice-panel" aria-labelledby="adviceTitle">'
-      +'<div class="advice-kicker">ACTION GUIDE</div><h3 class="advice-title" id="adviceTitle">制度を見るだけで終わらせないために</h3>'
+      +'<div class="advice-kicker">次の一歩</div><h3 class="advice-title" id="adviceTitle">今日からできる準備</h3>'
       +'<div class="advice-first"><span>まず今日やること</span><strong>'+a.first+'</strong></div>'
       +'<div class="advice-grid">'
       +'<div class="advice-item"><b>手元に用意する情報</b><p>'+a.prepare+'</p></div>'
@@ -590,10 +592,10 @@
     var g=STGRANTS[PURPOSE_INDEX[key]];
     if(!g) return;
     input.hidden=true;
-    out.innerHTML='<h2 id="purposeResultTitle" tabindex="-1">あなたに近い制度候補</h2>'
-      +'<p class="purpose-result-lead">「'+PURPOSE_LABEL[key]+'」に近い制度です。まず概要を確認し、最新の対象条件・締切は公式サイトで確認してください。</p>'
-      +'<div class="grantlist">'+grantCard(g)+'</div>'
+    out.innerHTML='<h2 id="purposeResultTitle" tabindex="-1">まず、ここから整理しましょう</h2>'
+      +'<p class="purpose-result-lead">「'+PURPOSE_LABEL[key]+'」で助成金・補助金を探すときに、先に整理すると相談が早くなる内容です。</p>'
       +renderAdvice(key)
+      +'<section class="candidate-section" aria-labelledby="candidateTitle"><h3 class="candidate-label" id="candidateTitle">確認したい制度候補</h3><div class="grantlist">'+grantCard(g)+'</div></section>'
       +'<div class="purpose-result-note"><b style="color:var(--navy)">ここでは候補まで。</b>お店ごとの対象可否・金額を確定するものではありません。申請や発注の前に、公式の最新情報と専門家への要件確認が安全です。</div>'
       +renderRegionFinder()
       +'<div class="purpose-actions"><button type="button" class="btn secondary" id="purposeResultBack">別の困りごとを選ぶ</button><button type="button" class="btn" id="purposeShowAll">すべての制度を見る</button></div>';
@@ -631,14 +633,14 @@
     if(r.why){
       h+='<div style="font-size:13px;color:var(--sub);background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:16px;line-height:1.7"><b style="color:var(--navy)">この判定の理由：</b>'+r.why+'</div>';
     }
+    if(r.steps){
+      h+='<div class="result-next"><div class="next-label">まず最初にやること</div><strong>'+r.steps[0]+'</strong></div>';
+    }
     if(r.amount){
       h+='<div class="amountcard"><h3>もらえる目安</h3><div class="amt">'+r.amount.text+'</div>'
         +(r.amount.addon?'<div style="margin-top:12px;font-size:13px;color:#cdd9f2;line-height:1.65;border-top:1px solid rgba(255,255,255,.15);padding-top:12px">'+r.amount.addon+'</div>':'')
         +'<div class="amtnote">'+r.amount.note+'</div></div>';
       h+='<div style="font-size:13px;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-bottom:16px;line-height:1.7">※ 助成金は<b style="color:var(--navy)">後払い・原則一度きり</b>です（正社員化して給与を6か月ほど払った"あと"に入ります）。要件の<b style="color:var(--navy)">賃金3%増は"続くコスト"</b>です（昇給は毎月・助成金は一度）。だから<b style="color:var(--navy)">"どうせ正社員化する予定"の人に乗せる</b>のが基本です（新しい設備投資などは不要。ただし昇給ぶんのコストは続きます）。<br>※ 実際の受給には、要件を満たした証拠と実地調査への対応が必要です。</div>';
-    }
-    if(r.steps){
-      h+='<div class="result-next"><div class="next-label">まず最初にやること</div><strong>'+r.steps[0]+'</strong></div>';
     }
     if(r.ng){
       h+='<details class="result-detail ng-detail"><summary>'+(r.ngTitle||'ここを外すと0円（注意点）')+'（'+r.ng.length+'項目）</summary><div class="detail-body"><ul>'+r.ng.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div></details>';
