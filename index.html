@@ -30,17 +30,21 @@
   .brand{font-weight:900; font-size:17px; color:var(--navy); letter-spacing:-.02em;}
   .brand span{color:var(--blue);}
   .brand-note{font-size:11px;font-weight:800;color:var(--sub);letter-spacing:.04em}
-  .hero{position:relative;padding:56px 44px 34px;margin:14px 0 22px;background:rgba(255,255,255,.82);border:1px solid rgba(18,58,143,.1);border-radius:28px;box-shadow:var(--sh-sm);overflow:hidden;}
+  .hero{position:relative;padding:46px 44px 34px;margin:14px 0 22px;background:rgba(255,255,255,.88);border:1px solid rgba(18,58,143,.1);border-radius:28px;box-shadow:var(--sh-sm);overflow:hidden;}
   .hero::before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;right:-90px;top:-120px;background:rgba(47,107,255,.09);pointer-events:none}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:900;color:var(--blue);margin-bottom:12px;letter-spacing:.03em;background:var(--blue-soft);border-radius:999px;padding:6px 11px}
   .eyebrow::before{content:"";width:7px;height:7px;border:2px solid var(--blue);border-radius:50%}
-  .hero h1{font-size:40px; line-height:1.28; margin:4px 0 16px; font-weight:900; letter-spacing:-.035em; color:var(--navy);}
+  .hero h1{font-size:37px; line-height:1.3; margin:4px 0 16px; font-weight:900; letter-spacing:-.035em; color:var(--navy);}
   .hero h1 em{font-style:normal; color:var(--blue);}
   .hero p{margin:0; color:var(--sub); font-size:15px; line-height:1.9;max-width:590px;}
   .hero p b{color:var(--navy);}
   .hero-proof{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:15px;color:var(--sub);font-size:11.5px;font-weight:700}
   .hero-proof span{display:flex;align-items:center;gap:6px}
   .hero-proof span::before{content:"";width:7px;height:4px;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg) translateY(-1px)}
+  .tool-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:20px;padding:14px 8px;border:1px solid #dce5f7;border-radius:14px;background:var(--soft)}
+  .tool-flow-item{position:relative;display:flex;align-items:center;gap:8px;padding:0 10px;color:var(--navy);font-size:12px;font-weight:800;line-height:1.45}
+  .tool-flow-item+.tool-flow-item{border-left:1px solid #d8e1f1}
+  .tool-flow-num{display:grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:900}
   .btn{display:block; width:100%; border:none; cursor:pointer; font-family:inherit; font-weight:800; font-size:17px;
     min-height:58px;padding:16px 20px; border-radius:14px; background:var(--blue); color:#fff; letter-spacing:.02em;
     box-shadow:var(--sh-blue); transition:background .18s, transform .12s, box-shadow .18s;}
@@ -51,6 +55,7 @@
   .btn-icon::before{content:"";position:absolute;width:5px;height:5px;border-top:1.8px solid currentColor;border-right:1.8px solid currentColor;transform:rotate(45deg);left:4px;top:4px}
   .toggle{display:inline-flex;align-items:center;gap:7px;background:none; border:none; color:var(--navy); font-weight:800; font-size:13px; cursor:pointer; padding:9px 2px; font-family:inherit;}
   .toggle::after{content:"";width:6px;height:6px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(45deg) translateY(-2px)}
+  #inputCard>.toggle{margin-bottom:12px}
   .lpwrap{display:none;}
   .lp-block{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px 26px; margin-bottom:12px; box-shadow:var(--sh-sm);}
   .lp-block h2{font-size:18px; font-weight:800; margin:0 0 8px; line-height:1.5; color:var(--navy);}
@@ -178,8 +183,8 @@
   .browse-toggle:hover{border-color:#b7c8ec;transform:translateY(-1px)}
   @media(max-width:640px){
     .wrap{padding:0 14px 64px}.brand-note{display:none}header{padding:18px 4px 2px}
-    .hero{padding:32px 20px 26px;margin-top:10px;border-radius:22px}.hero h1{font-size:31px}.hero p{font-size:14px;line-height:1.85}
-    .hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}.btn{font-size:16px;min-height:56px}.lp-block{padding:20px}
+    .hero{padding:30px 20px 24px;margin-top:10px;border-radius:22px}.hero h1{font-size:29px}.hero p{font-size:14px;line-height:1.8}
+    .tool-flow{padding:12px 4px}.tool-flow-item{display:block;padding:0 7px;font-size:10.5px;text-align:center}.tool-flow-num{margin:0 auto 6px;width:22px;height:22px}.hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}.btn{font-size:16px;min-height:56px}.lp-block{padding:18px}
     .purpose-card,.purpose-result{padding:18px 16px;border-radius:20px}.purpose-title{font-size:20px}.purpose-grid{grid-template-columns:1fr}.purpose-opt{min-height:72px}.purpose-actions{flex-direction:column}.advice-panel{padding:16px 14px}.advice-grid{grid-template-columns:1fr}.advice-script{grid-column:auto}
     .card{padding:16px;border-radius:20px}.form-intro{align-items:flex-start;padding:4px 2px 18px;margin-bottom:16px}.form-title{font-size:19px}.form-step{margin-top:2px}
     .freshbar{font-size:13px;padding:12px}.q{padding:17px 14px;margin-bottom:11px}.q .qlabel{font-size:15px}.q .qhint{font-size:13px}
@@ -195,40 +200,29 @@
 
   <div id="topArea">
   <div class="hero">
-    <div class="eyebrow">美容室の困りごとから、候補をしぼれます</div>
-    <h1>助成金・補助金、<em>うちは何が使えそう？</em></h1>
-    <p>正社員化だけでなく、<b>賃上げと設備投資・スタッフ育成・産休育休・集客・デジタル化</b>まで。最初に困りごとを選ぶと、<b>近い制度と公式の確認先</b>がわかります。</p>
-    <div class="hero-proof"><span>6つの困りごとから選択</span><span>入力内容は保存しません</span><span>公式情報に基づく目安</span></div>
-    <button type="button" class="btn" id="skipToCalc" style="margin-top:22px"><span class="btn-icon" aria-hidden="true"></span>困りごとから探す</button>
-    <button type="button" class="toggle" id="lpToggle" style="margin-top:11px">正社員化の助成金を知る（30秒）</button>
-  </div>
-
-  <div class="lpwrap" id="lpWrap">
-    <div class="lp-block">
-      <h2>正社員化を、<em>国が後押ししてくれる</em>制度です。</h2>
-      <p>「キャリアアップ助成金（正社員化コース）」は、契約社員・パートなどの非正規スタッフを正社員にした美容室に、国から助成金が出る制度。人を大事にする経営が、そのまま数十万円のリターンになります。</p>
+    <div class="eyebrow">美容室オーナー専用・無料</div>
+    <h1>美容室の<em>助成金・補助金</em>を、やりたいことから探せます。</h1>
+    <p><b>制度名を知らなくても大丈夫。</b>「スタッフを正社員にしたい」「設備を入れたい」など、いちばん近いものを選ぶと、<b>制度候補・動く前の注意・今日の準備</b>まで整理できます。</p>
+    <div class="tool-flow" aria-label="このツールの使い方">
+      <div class="tool-flow-item"><span class="tool-flow-num">1</span>やりたいことを選ぶ</div>
+      <div class="tool-flow-item"><span class="tool-flow-num">2</span>候補と注意が分かる</div>
+      <div class="tool-flow-item"><span class="tool-flow-num">3</span>今日の準備が分かる</div>
     </div>
-    <div class="lp-block">
-      <h2>もらえる目安は、<em>1人あたり数十万円</em>。</h2>
-      <p>中小企業なら、有期→正社員で1人最大80万円（条件により40万円）、無期→正社員で最大40万円。就業規則の整備などで加算も。1年度で最大20人まで（人数の上限や計画・管理者は<b>店舗＝事業所ごと</b>）。</p>
-    </div>
-    <div class="lp-block">
-      <h2>でも、<em>順番を1つ間違えると0円</em>です。</h2>
-      <p>一番多い失敗が「先に正社員にしてしまった」。この制度は<b>正社員にする前に、計画書を国へ出しておく</b>のが絶対条件。だから"やる前に"可能性と順番を知るのが大事です。</p>
-    </div>
+    <div class="hero-proof"><span>登録不要</span><span>入力内容は保存しません</span><span>公式情報に基づく目安</span></div>
+    <button type="button" class="btn" id="skipToCalc" style="margin-top:20px"><span class="btn-icon" aria-hidden="true"></span>今やりたいことを選ぶ</button>
   </div>
 
   <div class="purpose-card" id="purposeHub" tabindex="-1">
     <fieldset>
-      <legend class="purpose-title">今、いちばん近い困りごとは？</legend>
-      <p class="purpose-lead">選ぶと、該当しそうな制度と次の確認先へ進みます。複数ある場合は、まず一番近いものからで大丈夫です。</p>
+      <legend class="purpose-title">今、お店でやりたいことは？</legend>
+      <p class="purpose-lead">制度名は分からなくて大丈夫です。いちばん近いものを1つ選んでください。</p>
       <div class="purpose-grid">
-        <button type="button" class="purpose-opt" data-purpose="career">非正規スタッフを正社員にしたい<span>キャリアアップ助成金を詳しく診断</span></button>
-        <button type="button" class="purpose-opt" data-purpose="wage">賃上げと一緒に設備投資したい<span>時給と設備更新の支援を確認</span></button>
-        <button type="button" class="purpose-opt" data-purpose="training">スタッフを育てたい<span>研修・技術教育の支援を確認</span></button>
-        <button type="button" class="purpose-opt" data-purpose="leave">産休・育休に対応したい<span>両立支援の制度を確認</span></button>
-        <button type="button" class="purpose-opt" data-purpose="sales">集客に投資したい<span>HP・看板・改装などの支援を確認</span></button>
-        <button type="button" class="purpose-opt" data-purpose="digital">予約・会計をデジタル化したい<span>IT導入の支援を確認</span></button>
+        <button type="button" class="purpose-opt" data-purpose="career">正社員にしたいスタッフがいる<span>使える可能性と、先に必要な準備を見る</span></button>
+        <button type="button" class="purpose-opt" data-purpose="wage">給与を上げて、設備も入れたい<span>時給と設備更新の支援を見る</span></button>
+        <button type="button" class="purpose-opt" data-purpose="training">スタッフを研修に行かせたい<span>技術・接客を学ぶ支援を見る</span></button>
+        <button type="button" class="purpose-opt" data-purpose="leave">産休・育休を安心して支えたい<span>お店側の準備と支援を見る</span></button>
+        <button type="button" class="purpose-opt" data-purpose="sales">新規客・再来を増やしたい<span>HP・看板・改装などの支援を見る</span></button>
+        <button type="button" class="purpose-opt" data-purpose="digital">予約・会計の手間を減らしたい<span>IT導入で使える支援を見る</span></button>
       </div>
     </fieldset>
   </div>
@@ -237,9 +231,24 @@
 
   <!-- INPUT -->
   <div class="card" id="inputCard" tabindex="-1" hidden>
-    <div class="form-intro"><div><div class="form-kicker">Quick check</div><div class="form-title">基本3項目を、順番に選んでください</div><div class="form-sub">回答に合わせて、必要な項目だけ表示します。</div></div><div class="form-step" id="progressText" aria-live="polite">0 / 3 回答済み</div></div>
+    <div class="form-intro"><div><div class="form-kicker">正社員化チェック</div><div class="form-title">正社員化で使える可能性を確認</div><div class="form-sub">基本3項目だけ。回答に合わせて、必要な項目を表示します。</div></div><div class="form-step" id="progressText" aria-live="polite">0 / 3 回答済み</div></div>
     <div class="freshbar">この診断は<b>厚生労働省「令和8年度版」</b>の公式情報に基づく<b>目安</b>です。金額・要件は改正されるため、最新は公式でご確認ください。可否や金額を確定するものではありません。</div>
     <div class="privacy-note">氏名・連絡先の入力はありません。回答は保存・送信されません。</div>
+    <button type="button" class="toggle" id="lpToggle">正社員化の助成金を30秒で知る</button>
+    <div class="lpwrap" id="lpWrap">
+      <div class="lp-block">
+        <h2>正社員化を、<em>国が後押ししてくれる</em>制度です。</h2>
+        <p>「キャリアアップ助成金（正社員化コース）」は、契約社員・パートなどの非正規スタッフを正社員にした美容室に、国から助成金が出る制度。人を大事にする経営が、そのまま数十万円のリターンになります。</p>
+      </div>
+      <div class="lp-block">
+        <h2>もらえる目安は、<em>1人あたり数十万円</em>。</h2>
+        <p>中小企業なら、有期→正社員で1人最大80万円（条件により40万円）、無期→正社員で最大40万円。就業規則の整備などで加算も。1年度で最大20人まで（人数の上限や計画・管理者は<b>店舗＝事業所ごと</b>）。</p>
+      </div>
+      <div class="lp-block">
+        <h2>でも、<em>順番を1つ間違えると0円</em>です。</h2>
+        <p>一番多い失敗が「先に正社員にしてしまった」。この制度は<b>正社員にする前に、計画書を国へ出しておく</b>のが絶対条件。だから"やる前に"可能性と順番を知るのが大事です。</p>
+      </div>
+    </div>
     <fieldset class="q" id="qEmploy">
       <legend class="qlabel">Q1. 今、雇用保険に入っているスタッフはいますか？<span class="qhint">社員・パート・アルバイト問わず。給与から雇用保険料を引いていれば加入しています（週20時間以上＋31日以上働く見込みなら通常は加入。昼間学生は原則対象外）。</span></legend>
       <div class="opts" data-q="employ">
@@ -339,7 +348,7 @@
     // lpwrap default display:none via class; toggle inline
     var shown=getComputedStyle(w).display!=='none';
     w.style.display=shown?'none':'block';
-    this.textContent=shown?'正社員化の助成金を知る（30秒）＋':'説明を閉じる −';
+    this.textContent=shown?'正社員化の助成金を30秒で知る':'説明を閉じる';
     this.setAttribute('aria-expanded',shown?'false':'true');
   });
   function goPurpose(){ $('#purposeHub').scrollIntoView({behavior:'smooth',block:'start'}); $('#purposeHub').focus({preventScroll:true}); }
