@@ -79,6 +79,18 @@
   .purpose-result h2:focus{outline:none}
   .purpose-result-lead{margin:0 0 16px;color:var(--sub);font-size:13.5px;line-height:1.7}
   .purpose-result-note{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--soft);color:var(--sub);font-size:12.5px;line-height:1.7}
+  .advice-panel{margin-top:16px;border:1px solid #cbd9fb;border-radius:18px;background:linear-gradient(180deg,#f8faff 0%,var(--blue-soft) 100%);padding:20px}
+  .advice-kicker{font-size:11px;font-weight:900;letter-spacing:.09em;color:var(--blue);margin-bottom:4px}
+  .advice-title{margin:0;color:var(--navy);font-size:18px;font-weight:900;line-height:1.5}
+  .advice-first{margin-top:13px;padding:15px 16px;border-radius:13px;background:var(--navy);color:#fff}
+  .advice-first span{display:block;margin-bottom:3px;color:#b9cdf5;font-size:11px;font-weight:900;letter-spacing:.06em}
+  .advice-first strong{display:block;font-size:15px;line-height:1.65}
+  .advice-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}
+  .advice-item{padding:13px 14px;border:1px solid rgba(18,58,143,.12);border-radius:12px;background:#fff}
+  .advice-item b{display:block;margin-bottom:4px;color:var(--blue);font-size:11.5px}
+  .advice-item p{margin:0;color:var(--ink);font-size:12.5px;line-height:1.7}
+  .advice-script{grid-column:1/-1;background:#fff;border-left:4px solid var(--blue)}
+  .advice-script p{color:var(--navy);font-weight:700}
   .purpose-actions{display:flex;gap:9px;margin-top:14px}
   .purpose-actions .btn{min-height:50px;font-size:14px;padding:12px 16px}
   .q{margin-bottom:14px;padding:20px;background:#fff;border:1px solid var(--line);border-radius:16px;transition:border-color .2s,box-shadow .2s;}
@@ -166,7 +178,7 @@
     .wrap{padding:0 14px 64px}.brand-note{display:none}header{padding:18px 4px 2px}
     .hero{padding:32px 20px 26px;margin-top:10px;border-radius:22px}.hero h1{font-size:31px}.hero p{font-size:14px;line-height:1.85}
     .hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}.btn{font-size:16px;min-height:56px}.lp-block{padding:20px}
-    .purpose-card,.purpose-result{padding:18px 16px;border-radius:20px}.purpose-title{font-size:20px}.purpose-grid{grid-template-columns:1fr}.purpose-opt{min-height:72px}.purpose-actions{flex-direction:column}
+    .purpose-card,.purpose-result{padding:18px 16px;border-radius:20px}.purpose-title{font-size:20px}.purpose-grid{grid-template-columns:1fr}.purpose-opt{min-height:72px}.purpose-actions{flex-direction:column}.advice-panel{padding:16px 14px}.advice-grid{grid-template-columns:1fr}.advice-script{grid-column:auto}
     .card{padding:16px;border-radius:20px}.form-intro{align-items:flex-start;padding:4px 2px 18px;margin-bottom:16px}.form-title{font-size:19px}.form-step{margin-top:2px}
     .freshbar{font-size:13px;padding:12px}.q{padding:17px 14px;margin-bottom:11px}.q .qlabel{font-size:15px}.q .qhint{font-size:13px}
     .opts{display:grid;grid-template-columns:1fr}.opt{width:100%;text-align:left;font-size:13.5px;min-height:48px}.subq{padding:15px 12px}
@@ -524,6 +536,49 @@
   });
   var PURPOSE_INDEX={wage:1,training:2,leave:3,sales:4,digital:5};
   var PURPOSE_LABEL={wage:'賃上げと設備投資',training:'スタッフ育成',leave:'産休・育休対応',sales:'集客への投資',digital:'予約・会計のデジタル化'};
+  var PURPOSE_ADVICE={
+    wage:{
+      first:'スタッフごとの現在の時給と、店でいちばん低い時給を1枚にまとめる。',
+      prepare:'更新したい設備、困っている作業、候補設備の見積もりを並べる。設備を入れることで何が楽になるかも一言で書く。',
+      check:'賃上げや発注を先に決めず、現在の時給で対象候補になるか、申請と発注の順番を公式・専門家へ確認する。',
+      script:'「現在の最低時給は○円で、○○設備の更新を考えています。動く前に確認する条件と順番を教えてください」'
+    },
+    training:{
+      first:'誰に、どの技術を、いつまでに身につけてほしいかを1人ずつ書き出す。',
+      prepare:'受けたい研修の内容・日程・費用と、今の育成課題をまとめる。日々の店内指導と外部研修は分けて整理する。',
+      check:'申込みや受講を先に進めず、その研修が制度の対象候補か、実施前に必要な確認がないかを公式・専門家へ聞く。',
+      script:'「○○さんに○○技術の研修を受けてもらう予定です。申込み前に確認する要件と記録を教えてください」'
+    },
+    leave:{
+      first:'本人の希望時期と、お店で引き継ぎが必要な仕事を別々に整理する。',
+      prepare:'雇用契約、就業規則、勤務表、現在の担当業務を手元にそろえる。本人との会話内容も簡単にメモする。',
+      check:'支給額や対象を約束せず、制度利用の可能性と会社側の手続き順を早めに労働局・専門家へ確認する。',
+      script:'「スタッフから○月ごろの休業希望が出ています。本人への案内と会社が先に整えることを確認したいです」'
+    },
+    sales:{
+      first:'新規客・再来率・客単価のうち、今回いちばん改善したいものを1つだけ決める。',
+      prepare:'やりたい施策、概算見積もり、今の集客経路、実施後に追う数字を1枚にまとめる。',
+      check:'公募中か、対象経費になりそうか、契約・発注の前に何が必要かを公式窓口で確認してから進める。',
+      script:'「○○の集客改善に○○を予定しています。契約前に対象経費と申請の順番を確認したいです」'
+    },
+    digital:{
+      first:'予約・会計・レジの中で、毎週いちばん時間を取られている作業を1つ決める。',
+      prepare:'今の作業手順、候補ツール、初期費用・月額費用、削減したい時間を比較できる形にする。',
+      check:'補助額だけで製品を決めず、継続コストと使い続けられるかを比べ、契約前に公式の対象条件と順番を確認する。',
+      script:'「現在は○○作業に週○時間かかり、○○ツールを検討中です。契約前の確認事項を教えてください」'
+    }
+  };
+  function renderAdvice(key){
+    var a=PURPOSE_ADVICE[key]; if(!a) return '';
+    return '<section class="advice-panel" aria-labelledby="adviceTitle">'
+      +'<div class="advice-kicker">ACTION GUIDE</div><h3 class="advice-title" id="adviceTitle">制度を見るだけで終わらせないために</h3>'
+      +'<div class="advice-first"><span>まず今日やること</span><strong>'+a.first+'</strong></div>'
+      +'<div class="advice-grid">'
+      +'<div class="advice-item"><b>手元に用意する情報</b><p>'+a.prepare+'</p></div>'
+      +'<div class="advice-item"><b>動く前に確認すること</b><p>'+a.check+'</p></div>'
+      +'<div class="advice-item advice-script"><b>このまま相談に使える一言</b><p>'+a.script+'</p></div>'
+      +'</div></section>';
+  }
   function showPurposeChoice(key){
     var input=$('#inputCard'); var out=$('#purposeResult');
     if(key==='career'){
@@ -538,6 +593,7 @@
     out.innerHTML='<h2 id="purposeResultTitle" tabindex="-1">あなたに近い制度候補</h2>'
       +'<p class="purpose-result-lead">「'+PURPOSE_LABEL[key]+'」に近い制度です。まず概要を確認し、最新の対象条件・締切は公式サイトで確認してください。</p>'
       +'<div class="grantlist">'+grantCard(g)+'</div>'
+      +renderAdvice(key)
       +'<div class="purpose-result-note"><b style="color:var(--navy)">ここでは候補まで。</b>お店ごとの対象可否・金額を確定するものではありません。申請や発注の前に、公式の最新情報と専門家への要件確認が安全です。</div>'
       +renderRegionFinder()
       +'<div class="purpose-actions"><button type="button" class="btn secondary" id="purposeResultBack">別の困りごとを選ぶ</button><button type="button" class="btn" id="purposeShowAll">すべての制度を見る</button></div>';
