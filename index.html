@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>その助成金、うちはいける？チェッカー｜airchair</title>
+<title>美容室の助成金・補助金チェッカー｜airchair</title>
 <style>
   :root{
     --navy:#123A8F; --blue:#2F6BFF; --blue-deep:#1f52e0; --blue-soft:#e9f0ff;
@@ -64,6 +64,23 @@
   .form-sub{font-size:13px;color:var(--sub);line-height:1.65;margin-top:5px}
   .privacy-note{display:flex;align-items:flex-start;gap:8px;margin:0 0 14px;padding:11px 13px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:13px;color:var(--sub);line-height:1.55}
   .privacy-note::before{content:"";flex:none;width:8px;height:5px;margin-top:5px;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg)}
+  .purpose-card{background:#fff;border:1px solid rgba(18,58,143,.12);border-radius:24px;padding:30px;margin-bottom:18px;box-shadow:0 24px 60px -42px rgba(18,58,143,.55)}
+  .purpose-card fieldset{border:0;padding:0;margin:0}
+  .purpose-title{display:block;width:100%;padding:0;margin:0 0 7px;color:var(--navy);font-size:22px;font-weight:900;line-height:1.45;letter-spacing:-.02em}
+  .purpose-lead{margin:0 0 20px;color:var(--sub);font-size:13.5px;line-height:1.7}
+  .purpose-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .purpose-opt{position:relative;min-height:82px;padding:16px 42px 16px 17px;border:1.5px solid #d8e1f1;border-radius:14px;background:var(--field);color:var(--navy);font:800 14px/1.5 inherit;text-align:left;cursor:pointer;transition:border-color .15s,background .15s,transform .12s}
+  .purpose-opt:hover{border-color:var(--blue);background:var(--blue-soft);transform:translateY(-1px)}
+  .purpose-opt::after{content:"";position:absolute;right:18px;top:50%;width:8px;height:8px;border-top:2px solid var(--blue);border-right:2px solid var(--blue);transform:translateY(-50%) rotate(45deg)}
+  .purpose-opt span{display:block;margin-top:3px;color:var(--sub);font-size:11.5px;font-weight:600;line-height:1.5}
+  .purpose-opt:focus-visible{outline:3px solid rgba(47,107,255,.3);outline-offset:3px}
+  .purpose-result{background:#fff;border:1px solid rgba(18,58,143,.12);border-radius:24px;padding:28px;margin-bottom:18px;box-shadow:var(--sh-sm)}
+  .purpose-result h2{margin:0 0 5px;color:var(--navy);font-size:21px;line-height:1.45}
+  .purpose-result h2:focus{outline:none}
+  .purpose-result-lead{margin:0 0 16px;color:var(--sub);font-size:13.5px;line-height:1.7}
+  .purpose-result-note{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--soft);color:var(--sub);font-size:12.5px;line-height:1.7}
+  .purpose-actions{display:flex;gap:9px;margin-top:14px}
+  .purpose-actions .btn{min-height:50px;font-size:14px;padding:12px 16px}
   .q{margin-bottom:14px;padding:20px;background:#fff;border:1px solid var(--line);border-radius:16px;transition:border-color .2s,box-shadow .2s;}
   .q:focus-within{border-color:#b9caf3;box-shadow:0 10px 24px -22px rgba(18,58,143,.7)}
   .q.has-error{border-color:var(--red);box-shadow:0 0 0 3px rgba(208,70,59,.1)}
@@ -149,6 +166,7 @@
     .wrap{padding:0 14px 64px}.brand-note{display:none}header{padding:18px 4px 2px}
     .hero{padding:32px 20px 26px;margin-top:10px;border-radius:22px}.hero h1{font-size:31px}.hero p{font-size:14px;line-height:1.85}
     .hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}.btn{font-size:16px;min-height:56px}.lp-block{padding:20px}
+    .purpose-card,.purpose-result{padding:18px 16px;border-radius:20px}.purpose-title{font-size:20px}.purpose-grid{grid-template-columns:1fr}.purpose-opt{min-height:72px}.purpose-actions{flex-direction:column}
     .card{padding:16px;border-radius:20px}.form-intro{align-items:flex-start;padding:4px 2px 18px;margin-bottom:16px}.form-title{font-size:19px}.form-step{margin-top:2px}
     .freshbar{font-size:13px;padding:12px}.q{padding:17px 14px;margin-bottom:11px}.q .qlabel{font-size:15px}.q .qhint{font-size:13px}
     .opts{display:grid;grid-template-columns:1fr}.opt{width:100%;text-align:left;font-size:13.5px;min-height:48px}.subq{padding:15px 12px}
@@ -163,12 +181,12 @@
 
   <div id="topArea">
   <div class="hero">
-    <div class="eyebrow">取れたはずのお金、毎年そのまま通り過ぎていませんか？</div>
-    <h1>その助成金、<em>うちは"いける"？</em></h1>
-    <p>非正規スタッフの正社員化など、<b>"どうせやること"に助成金を乗せるだけ</b>。国から1人最大80万円＋加算（中小）の制度も。<b>かんたんな質問で、うちのサロンで"今"使える可能性がわかります。</b></p>
-    <div class="hero-proof"><span>基本3項目・条件により追加確認</span><span>入力内容は保存しません</span><span>公式情報に基づく目安</span></div>
-    <button type="button" class="btn" id="skipToCalc" style="margin-top:22px"><span class="btn-icon" aria-hidden="true"></span>すぐに診断する</button>
-    <button type="button" class="toggle" id="lpToggle" style="margin-top:11px">そもそもどんな助成金？（30秒で読む）</button>
+    <div class="eyebrow">美容室の困りごとから、候補をしぼれます</div>
+    <h1>助成金・補助金、<em>うちは何が使えそう？</em></h1>
+    <p>正社員化だけでなく、<b>賃上げと設備投資・スタッフ育成・産休育休・集客・デジタル化</b>まで。最初に困りごとを選ぶと、<b>近い制度と公式の確認先</b>がわかります。</p>
+    <div class="hero-proof"><span>6つの困りごとから選択</span><span>入力内容は保存しません</span><span>公式情報に基づく目安</span></div>
+    <button type="button" class="btn" id="skipToCalc" style="margin-top:22px"><span class="btn-icon" aria-hidden="true"></span>困りごとから探す</button>
+    <button type="button" class="toggle" id="lpToggle" style="margin-top:11px">正社員化の助成金を知る（30秒）</button>
   </div>
 
   <div class="lpwrap" id="lpWrap">
@@ -186,8 +204,25 @@
     </div>
   </div>
 
+  <div class="purpose-card" id="purposeHub" tabindex="-1">
+    <fieldset>
+      <legend class="purpose-title">今、いちばん近い困りごとは？</legend>
+      <p class="purpose-lead">選ぶと、該当しそうな制度と次の確認先へ進みます。複数ある場合は、まず一番近いものからで大丈夫です。</p>
+      <div class="purpose-grid">
+        <button type="button" class="purpose-opt" data-purpose="career">非正規スタッフを正社員にしたい<span>キャリアアップ助成金を詳しく診断</span></button>
+        <button type="button" class="purpose-opt" data-purpose="wage">賃上げと一緒に設備投資したい<span>時給と設備更新の支援を確認</span></button>
+        <button type="button" class="purpose-opt" data-purpose="training">スタッフを育てたい<span>研修・技術教育の支援を確認</span></button>
+        <button type="button" class="purpose-opt" data-purpose="leave">産休・育休に対応したい<span>両立支援の制度を確認</span></button>
+        <button type="button" class="purpose-opt" data-purpose="sales">集客に投資したい<span>HP・看板・改装などの支援を確認</span></button>
+        <button type="button" class="purpose-opt" data-purpose="digital">予約・会計をデジタル化したい<span>IT導入の支援を確認</span></button>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="purpose-result" id="purposeResult" role="region" aria-labelledby="purposeResultTitle" hidden></div>
+
   <!-- INPUT -->
-  <div class="card" id="inputCard" tabindex="-1">
+  <div class="card" id="inputCard" tabindex="-1" hidden>
     <div class="form-intro"><div><div class="form-kicker">Quick check</div><div class="form-title">基本3項目を、順番に選んでください</div><div class="form-sub">回答に合わせて、必要な項目だけ表示します。</div></div><div class="form-step" id="progressText" aria-live="polite">0 / 3 回答済み</div></div>
     <div class="freshbar">この診断は<b>厚生労働省「令和8年度版」</b>の公式情報に基づく<b>目安</b>です。金額・要件は改正されるため、最新は公式でご確認ください。可否や金額を確定するものではありません。</div>
     <div class="privacy-note">氏名・連絡先の入力はありません。回答は保存・送信されません。</div>
@@ -245,7 +280,7 @@
     </div>
   </div>
 
-  <button type="button" id="grantsToggle" class="browse-toggle">＋ ほかの助成金・補助金も見る<br><span style="font-weight:600;font-size:12px;color:var(--sub)">採用・賃上げ・育成・産休育休・集客・デジタル化 の困りごと別に</span></button>
+  <button type="button" id="grantsToggle" class="browse-toggle">＋ すべての制度を一覧で見る<br><span style="font-weight:600;font-size:12px;color:var(--sub)">正社員化・賃上げ・育成・産休育休・集客・デジタル化</span></button>
   <div id="grantsBrowse"></div>
   </div>
 
@@ -290,11 +325,11 @@
     // lpwrap default display:none via class; toggle inline
     var shown=getComputedStyle(w).display!=='none';
     w.style.display=shown?'none':'block';
-    this.textContent=shown?'そもそもどんな助成金？（30秒で読む）＋':'説明を閉じる −';
+    this.textContent=shown?'正社員化の助成金を知る（30秒）＋':'説明を閉じる −';
     this.setAttribute('aria-expanded',shown?'false':'true');
   });
-  function goInput(){ $('#inputCard').scrollIntoView({behavior:'smooth',block:'start'}); }
-  $('#skipToCalc').addEventListener('click',goInput);
+  function goPurpose(){ $('#purposeHub').scrollIntoView({behavior:'smooth',block:'start'}); $('#purposeHub').focus({preventScroll:true}); }
+  $('#skipToCalc').addEventListener('click',goPurpose);
 
   // option groups
   $$('.opts').forEach(function(grp){
@@ -461,18 +496,21 @@
       +'<div style="color:var(--sub);font-size:12px;margin-top:8px">※ '+p+'・市区町村の<b>独自の助成金・補助金</b>もあります（「'+p+' 事業者 助成金」「お住まいの市区町村名 補助金」で検索）。</div>'
       +'</div>';
   }
-  function renderGrants(){
+  function grantCard(g){
+    return '<a class="grant" href="'+g.u+'" target="_blank" rel="noopener"><div class="gtag">'+g.t+'</div><div class="gname">'+g.n+' <span class="garrow">公式サイト↗</span></div><div class="gdesc">'+g.d+'</div><div class="gfor">向く店：'+g.f+'</div></a>';
+  }
+  function renderRegionFinder(){
     var opts='<option value="">選んでください</option>'+PREF.map(function(p){return '<option>'+p+'</option>';}).join('');
-    var region='<div class="pref-box" style="background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px">'
+    return '<div class="pref-box" style="background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:14px;margin-bottom:14px">'
       +'<label style="display:block;font-weight:800;font-size:13.5px;color:var(--navy);margin-bottom:8px">お住まいの地域（都道府県）でも探せます（任意）'
       +'<select class="prefSel" style="margin-top:8px">'+opts+'</select></label>'
       +'<div class="prefOut"></div></div>';
-    var cards=STGRANTS.map(function(g){
-      return '<a class="grant" href="'+g.u+'" target="_blank" rel="noopener"><div class="gtag">'+g.t+'</div><div class="gname">'+g.n+' <span class="garrow">公式サイト↗</span></div><div class="gdesc">'+g.d+'</div><div class="gfor">向く店：'+g.f+'</div></a>';
-    }).join('');
+  }
+  function renderGrants(){
+    var cards=STGRANTS.map(grantCard).join('');
     return '<div class="block"><h3>ほかに、うちが使えそうな助成金・補助金</h3>'
       +'<div class="qhint" style="margin-bottom:12px;color:var(--sub)">「こんな困りごとは？」の<b>困りごと別に並べています</b>。目的の"情報提供"で、<b>金額・締切は公募回ごとに変わる</b>ため、詳しくは各公式サイトで最新をご確認ください（令和8年度時点の目安）。<br><b>補助金は後払い（一旦立替）・自己負担あり（補助率2/3など）・「交付決定の前」に発注/契約すると対象外</b>になります。必ず採択・交付決定の"あと"に発注してください。</div>'
-      +region
+      +renderRegionFinder()
       +'<div class="grantlist">'+cards+'</div></div>';
   }
   // 都道府県セレクトの変更で地域リンクを差し替え（結果内・メイン両方で効くよう委譲）
@@ -484,8 +522,38 @@
       if(out) out.innerHTML=prefBlock(s.value);
     }
   });
+  var PURPOSE_INDEX={wage:1,training:2,leave:3,sales:4,digital:5};
+  var PURPOSE_LABEL={wage:'賃上げと設備投資',training:'スタッフ育成',leave:'産休・育休対応',sales:'集客への投資',digital:'予約・会計のデジタル化'};
+  function showPurposeChoice(key){
+    var input=$('#inputCard'); var out=$('#purposeResult');
+    if(key==='career'){
+      out.hidden=true; input.hidden=false;
+      input.scrollIntoView({behavior:'smooth',block:'start'});
+      requestAnimationFrame(function(){input.focus({preventScroll:true});});
+      return;
+    }
+    var g=STGRANTS[PURPOSE_INDEX[key]];
+    if(!g) return;
+    input.hidden=true;
+    out.innerHTML='<h2 id="purposeResultTitle" tabindex="-1">あなたに近い制度候補</h2>'
+      +'<p class="purpose-result-lead">「'+PURPOSE_LABEL[key]+'」に近い制度です。まず概要を確認し、最新の対象条件・締切は公式サイトで確認してください。</p>'
+      +'<div class="grantlist">'+grantCard(g)+'</div>'
+      +'<div class="purpose-result-note"><b style="color:var(--navy)">ここでは候補まで。</b>お店ごとの対象可否・金額を確定するものではありません。申請や発注の前に、公式の最新情報と専門家への要件確認が安全です。</div>'
+      +renderRegionFinder()
+      +'<div class="purpose-actions"><button type="button" class="btn secondary" id="purposeResultBack">別の困りごとを選ぶ</button><button type="button" class="btn" id="purposeShowAll">すべての制度を見る</button></div>';
+    out.hidden=false;
+    out.scrollIntoView({behavior:'smooth',block:'start'});
+    requestAnimationFrame(function(){ $('#purposeResultTitle').focus({preventScroll:true}); });
+    $('#purposeResultBack').addEventListener('click',function(){out.hidden=true;goPurpose();});
+    $('#purposeShowAll').addEventListener('click',function(){
+      var w=$('#grantsBrowse'); if(!w.innerHTML) w.innerHTML=renderGrants();
+      w.style.display='block'; $('#grantsToggle').innerHTML='− 閉じる'; $('#grantsToggle').setAttribute('aria-expanded','true');
+      w.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  }
+  $$('.purpose-opt').forEach(function(b){b.addEventListener('click',function(){showPurposeChoice(b.getAttribute('data-purpose'));});});
   // メイン画面：情報を"見たい人だけ"開く
-  var GT_OPEN='＋ ほかの助成金・補助金も見る<br><span style="font-weight:600;font-size:12px;color:var(--sub)">採用・賃上げ・育成・産休育休・集客・デジタル化 の困りごと別に</span>';
+  var GT_OPEN='＋ すべての制度を一覧で見る<br><span style="font-weight:600;font-size:12px;color:var(--sub)">正社員化・賃上げ・育成・産休育休・集客・デジタル化</span>';
   $('#grantsToggle').setAttribute('aria-expanded','false');
   $('#grantsToggle').addEventListener('click',function(){
     var w=$('#grantsBrowse'); var shown=w.style.display!=='none' && w.style.display!=='';
@@ -525,7 +593,7 @@
     h+='<div class="expert"><h3>次の一歩：要件を専門家に確認</h3><p>'+r.expert+' airchairでは、提携の社労士に「うちは要件を満たせるか」「NGを踏んでいないか」を確認できます（<b>相談したい方だけ</b>・無理な売り込みはしません）。</p></div>';
     if(r.grantsIntro){ h+='<div style="font-size:13px;color:var(--navy);font-weight:700;margin:0 2px 8px">'+r.grantsIntro+'</div>'; }
     h+='<details class="result-detail grants-detail"><summary>ほかの助成金・補助金も見る</summary><div class="detail-body">'+renderGrants()+'</div></details>';
-    h+='<div class="cta"><button class="btn secondary" id="backBtn">質問に戻る</button></div>';
+    h+='<div class="purpose-actions"><button class="btn secondary" id="backBtn">質問に戻る</button><button class="btn secondary" id="purposeBackBtn">ほかの困りごとを探す</button></div>';
     h+='<div class="foot">※ これは可能性の目安です。受給できるかどうかを確定するものではありません。可否・金額は要件確認が必要です。</div>';
     h+='<div class="src">出典：<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/part_haken/jigyounushi/career.html" target="_blank" rel="noopener">厚生労働省「キャリアアップ助成金のご案内（令和8年度版）」↗</a>（令和8年4月8日現在）／情報の最終確認日：2026-08-17。制度は改正されることがあります。<br>airchair</div>';
     $('#result').innerHTML=h;
@@ -536,6 +604,10 @@
     $('#backBtn').addEventListener('click',function(){
       $('#result').style.display='none'; $('#topArea').style.display='block';
       requestAnimationFrame(function(){ $('#inputCard').scrollIntoView({behavior:'smooth',block:'start'}); $('#inputCard').focus({preventScroll:true}); });
+    });
+    $('#purposeBackBtn').addEventListener('click',function(){
+      $('#result').style.display='none'; $('#topArea').style.display='block'; $('#inputCard').hidden=true; $('#purposeResult').hidden=true;
+      requestAnimationFrame(goPurpose);
     });
   }
 
