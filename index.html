@@ -78,11 +78,11 @@
   .survey-label{display:flex;align-items:flex-start;gap:10px;margin:0 0 12px;color:var(--navy);font-size:15px;font-weight:900;line-height:1.55}
   .survey-label small{display:block;color:var(--sub);font-size:12px;font-weight:600;margin-top:2px}
   .survey-num{display:grid;place-items:center;flex:none;width:25px;height:25px;margin-top:0;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:900}
-  .survey-team-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .survey-team-opt{position:relative;min-height:52px;padding:12px 36px 12px 14px;border:1.5px solid #d8e1f1;border-radius:12px;background:var(--field);color:var(--navy);font:800 13px/1.5 inherit;text-align:left;cursor:pointer;transition:border-color .15s,background .15s,transform .12s}
-  .survey-team-opt:hover{border-color:var(--blue);background:var(--blue-soft);transform:translateY(-1px)}
-  .survey-team-opt.on{background:var(--navy);border-color:var(--navy);color:#fff}
-  .survey-team-opt.on::after,.purpose-opt.on::after{content:"";position:absolute;right:16px;top:50%;width:7px;height:4px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-65%) rotate(-45deg)}
+  .survey-team-grid,.survey-time-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .survey-team-opt,.survey-time-opt{position:relative;min-height:52px;padding:12px 36px 12px 14px;border:1.5px solid #d8e1f1;border-radius:12px;background:var(--field);color:var(--navy);font:800 13px/1.5 inherit;text-align:left;cursor:pointer;transition:border-color .15s,background .15s,transform .12s}
+  .survey-team-opt:hover,.survey-time-opt:hover{border-color:var(--blue);background:var(--blue-soft);transform:translateY(-1px)}
+  .survey-team-opt.on,.survey-time-opt.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .survey-team-opt.on::after,.survey-time-opt.on::after,.purpose-opt.on::after{content:"";position:absolute;right:16px;top:50%;width:7px;height:4px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-65%) rotate(-45deg)}
   .survey-error{display:none;margin:0 0 10px;color:var(--red);font-size:13px;font-weight:800}
   .survey-status{margin-top:9px;color:var(--sub);font-size:12px;text-align:center}
   .purpose-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -110,6 +110,19 @@
   .recommendation-next{margin-top:9px;padding:11px 12px;border-radius:10px;background:var(--blue-soft);color:var(--navy);font-size:12.5px;line-height:1.65}
   .recommendation-next b{display:block;color:var(--blue);font-size:11px;margin-bottom:2px}
   .career-detail-btn{margin-top:10px;min-height:48px!important;font-size:13px!important}
+  .quick-check{margin-top:10px;border:1px solid #d5e0f7;border-radius:13px;background:#fff;overflow:hidden}
+  .quick-check-toggle{display:block;width:100%;padding:13px 42px 13px 14px;border:0;background:#fff;color:var(--navy);font:900 12.5px/1.5 inherit;text-align:left;cursor:pointer;position:relative}
+  .quick-check-toggle::after{content:"";position:absolute;right:17px;top:50%;width:7px;height:7px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:translateY(-65%) rotate(45deg)}
+  .quick-check-toggle[aria-expanded="true"]::after{transform:translateY(-35%) rotate(225deg)}
+  .quick-check-body{padding:0 14px 14px}
+  .quick-question{padding:12px 0;border-top:1px solid var(--line)}
+  .quick-question b{display:block;margin-bottom:8px;color:var(--navy);font-size:12.5px;line-height:1.55}
+  .quick-options{display:flex;flex-wrap:wrap;gap:6px}
+  .quick-opt{position:relative;min-height:40px;padding:9px 12px;border:1.5px solid #d8e1f1;border-radius:10px;background:var(--field);color:#46536a;font:800 12px/1.4 inherit;cursor:pointer}
+  .quick-opt.on{padding-right:30px;background:var(--navy);border-color:var(--navy);color:#fff}
+  .quick-opt.on::after{content:"";position:absolute;right:11px;top:50%;width:6px;height:3px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-65%) rotate(-45deg)}
+  .quick-result{margin-top:10px;padding:11px 12px;border-radius:10px;background:var(--soft);color:var(--ink);font-size:12.5px;line-height:1.65}
+  .quick-result strong{display:block;color:var(--blue);font-size:11px;margin-bottom:2px}
   .advice-panel{margin-top:16px;border:1px solid #cbd9fb;border-radius:18px;background:linear-gradient(180deg,#f8faff 0%,var(--blue-soft) 100%);padding:20px}
   .advice-kicker{font-size:11px;font-weight:900;letter-spacing:.09em;color:var(--blue);margin-bottom:4px}
   .advice-title{margin:0;color:var(--navy);font-size:18px;font-weight:900;line-height:1.5}
@@ -211,7 +224,7 @@
     .wrap{padding:0 14px 64px}.brand-note{display:none}header{padding:18px 4px 2px}
     .hero{padding:30px 20px 24px;margin-top:10px;border-radius:22px}.hero h1{font-size:29px}.hero p{font-size:14px;line-height:1.8}
     .tool-flow{padding:12px 4px}.tool-flow-item{display:block;padding:0 7px;font-size:10.5px;text-align:center}.tool-flow-num{margin:0 auto 6px;width:22px;height:22px}.hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}.btn{font-size:16px;min-height:56px}.lp-block{padding:18px}
-    .purpose-card,.purpose-result{padding:18px 16px;border-radius:20px}.purpose-title{font-size:20px}.survey-question{padding:15px 12px}.survey-team-grid,.purpose-grid{grid-template-columns:1fr}.survey-team-opt{min-height:50px}.purpose-opt{min-height:72px}.purpose-actions{flex-direction:column}.advice-panel{padding:16px 14px}.advice-grid{grid-template-columns:1fr}.advice-script{grid-column:auto}.recommendation-item{padding:13px}
+    .purpose-card,.purpose-result{padding:18px 16px;border-radius:20px}.purpose-title{font-size:20px}.survey-question{padding:15px 12px}.survey-team-grid,.survey-time-grid,.purpose-grid{grid-template-columns:1fr}.survey-team-opt,.survey-time-opt{min-height:50px}.purpose-opt{min-height:72px}.purpose-actions{flex-direction:column}.advice-panel{padding:16px 14px}.advice-grid{grid-template-columns:1fr}.advice-script{grid-column:auto}.recommendation-item{padding:13px}.quick-options{display:grid;grid-template-columns:1fr 1fr}.quick-opt{width:100%}
     .card{padding:16px;border-radius:20px}.form-intro{align-items:flex-start;padding:4px 2px 18px;margin-bottom:16px}.form-title{font-size:19px}.form-step{margin-top:2px}
     .freshbar{font-size:13px;padding:12px}.q{padding:17px 14px;margin-bottom:11px}.q .qlabel{font-size:15px}.q .qhint{font-size:13px}
     .opts{display:grid;grid-template-columns:1fr}.opt{width:100%;text-align:left;font-size:13.5px;min-height:48px}.subq{padding:15px 12px}
@@ -228,19 +241,19 @@
   <div class="hero">
     <div class="eyebrow">美容室オーナー向け・無料おすすめ診断</div>
     <h1>アンケートに答えると、<em>あなたの美容室に合いそうな助成金・補助金</em>をおすすめします。</h1>
-    <p><b>制度名を知らなくても大丈夫。</b>お店の体制と、これからやりたいことに答えると、<b>使えそうな制度候補を複数まとめて</b>確認できます。</p>
+    <p><b>制度名を知らなくても大丈夫。</b>まず3問に答えると使えそうな制度候補を複数表示。気になる候補だけ<b>追加2問で、次に何を確認するか</b>まで整理できます。</p>
     <div class="tool-flow" aria-label="このツールの使い方">
       <div class="tool-flow-item"><span class="tool-flow-num">1</span>お店の体制に答える</div>
       <div class="tool-flow-item"><span class="tool-flow-num">2</span>予定を複数選ぶ</div>
       <div class="tool-flow-item"><span class="tool-flow-num">3</span>おすすめ候補が分かる</div>
     </div>
-    <div class="hero-proof"><span>アンケートは2問</span><span>登録・入力保存なし</span><span>公式情報に基づく候補</span></div>
+    <div class="hero-proof"><span>基本3問＋追加2問</span><span>登録・入力保存なし</span><span>公式情報に基づく候補</span></div>
     <button type="button" class="btn" id="skipToCalc" style="margin-top:20px"><span class="btn-icon" aria-hidden="true"></span>無料アンケートを始める</button>
   </div>
 
   <div class="purpose-card" id="purposeHub" tabindex="-1">
     <div class="purpose-title">助成金・補助金 おすすめアンケート</div>
-    <p class="purpose-lead">2問とも選択式です。氏名・連絡先は不要で、回答は保存・送信されません。</p>
+    <p class="purpose-lead">まず3問、すべて選択式です。氏名・連絡先は不要で、回答は保存・送信されません。</p>
     <fieldset class="survey-question" id="surveyTeamQuestion">
       <legend class="survey-label"><span class="survey-num">1</span><span>今のお店の体制は？<small>いちばん近いものを1つ選んでください</small></span></legend>
       <div class="survey-team-grid">
@@ -261,9 +274,18 @@
         <button type="button" class="purpose-opt" data-purpose="digital">予約・会計の手間を減らしたい<span>IT導入で使える支援を見る</span></button>
       </div>
     </fieldset>
+    <fieldset class="survey-question" id="surveyTimeQuestion">
+      <legend class="survey-label"><span class="survey-num">3</span><span>いちばん早い予定は、いつごろ？<small>選んだ予定の中で、最初に動きそうな時期を選んでください</small></span></legend>
+      <div class="survey-time-grid">
+        <button type="button" class="survey-time-opt" data-time="planning">まだ検討し始めたところ</button>
+        <button type="button" class="survey-time-opt" data-time="soon">3か月以内に動きたい</button>
+        <button type="button" class="survey-time-opt" data-time="later">半年〜1年くらい先</button>
+        <button type="button" class="survey-time-opt" data-time="started">すでに契約・発注・実施した</button>
+      </div>
+    </fieldset>
     <div class="survey-error" id="surveyError" role="alert" aria-live="polite"></div>
     <button type="button" class="btn" id="recommendBtn" disabled>おすすめ候補を見る</button>
-    <div class="survey-status" id="surveyStatus" aria-live="polite">2問に答えると、おすすめ候補を確認できます。</div>
+    <div class="survey-status" id="surveyStatus" aria-live="polite">3問に答えると、おすすめ候補を確認できます。</div>
   </div>
 
   <div class="purpose-result" id="purposeResult" role="region" aria-labelledby="purposeResultTitle" hidden></div>
@@ -587,6 +609,39 @@
   var PURPOSE_INDEX={career:0,wage:1,training:2,leave:3,sales:4,digital:5};
   var PURPOSE_LABEL={career:'正社員化',wage:'賃上げと設備投資',training:'スタッフ育成',leave:'産休・育休対応',sales:'集客への投資',digital:'予約・会計のデジタル化'};
   var TEAM_LABEL={staff:'雇用スタッフがいる',hiring:'これから雇いたい',solo:'自分ひとりで営業',family:'家族・業務委託が中心'};
+  var TIME_LABEL={planning:'まだ検討し始めたところ',soon:'3か月以内',later:'半年〜1年くらい先',started:'すでに動き始めている'};
+  var TIME_ACTION={
+    planning:{label:'準備から始める',text:'まだ検討段階なので、必要な情報をそろえて公式の最新条件を確認しましょう。'},
+    soon:{label:'早めに確認',text:'3か月以内の予定です。契約・発注・実施を決める前に、公式窓口または専門家へ確認しましょう。'},
+    later:{label:'情報収集から',text:'予定まで時間があります。公募時期と必要な準備を先に確認しておくと安心です。'},
+    started:{label:'先に相談',text:'すでに動き始めています。追加の契約・発注・実施前に、公式窓口または専門家へ状況を伝えて確認しましょう。'}
+  };
+  var QUICK_CHECK={
+    career:[
+      {l:'正社員にしたいスタッフは、今いますか？',o:[['yes','いる'],['no','まだいない'],['unsure','分からない']]},
+      {l:'正社員への変更は、まだこれからですか？',o:[['before','これから'],['started','すでに変更した'],['unsure','分からない']]}
+    ],
+    wage:[
+      {l:'雇用しているスタッフに、時給で働く人はいますか？',o:[['yes','いる'],['no','いない'],['unsure','分からない']]},
+      {l:'賃上げや設備の発注は、まだこれからですか？',o:[['before','これから'],['started','すでに動いた'],['unsure','分からない']]}
+    ],
+    training:[
+      {l:'研修を受けるのは、雇用しているスタッフですか？',o:[['yes','はい'],['no','いいえ'],['unsure','分からない']]},
+      {l:'研修の申込み・受講は、まだこれからですか？',o:[['before','これから'],['started','すでに動いた'],['unsure','分からない']]}
+    ],
+    leave:[
+      {l:'産休・育休を考えている雇用スタッフはいますか？',o:[['yes','いる'],['no','まだいない'],['unsure','分からない']]},
+      {l:'休業の開始は、まだこれからですか？',o:[['before','これから'],['started','すでに始まった'],['unsure','分からない']]}
+    ],
+    sales:[
+      {l:'今のお店で働く人数は、どれに近いですか？',o:[['small','0〜5人'],['large','6人以上'],['unsure','分からない']]},
+      {l:'HP・改装・広告などの発注や契約は、まだこれからですか？',o:[['before','これから'],['started','すでに動いた'],['unsure','分からない']]}
+    ],
+    digital:[
+      {l:'導入したい予約・会計・レジなどの候補はありますか？',o:[['yes','候補がある'],['notyet','まだ決めていない'],['unsure','分からない']]},
+      {l:'そのツールの契約・支払いは、まだこれからですか？',o:[['before','これから'],['started','すでに動いた'],['unsure','分からない']]}
+    ]
+  };
   var PURPOSE_ADVICE={
     wage:{
       first:'スタッフごとの現在の時給と、店でいちばん低い時給を1枚にまとめる。',
@@ -632,12 +687,13 @@
   }
   var surveyTeam='';
   var surveyPurposes=[];
+  var surveyTime='';
   function updateSurveyState(){
-    var ready=!!surveyTeam&&surveyPurposes.length>0;
+    var ready=!!surveyTeam&&surveyPurposes.length>0&&!!surveyTime;
     $('#recommendBtn').disabled=!ready;
     $('#surveyStatus').textContent=ready
       ? surveyPurposes.length+'件の予定を選択中。おすすめ候補を確認できます。'
-      : (!surveyTeam?'Q1のお店の体制を選んでください。':'Q2で、やりたいことを1つ以上選んでください。');
+      : (!surveyTeam?'Q1のお店の体制を選んでください。':(!surveyPurposes.length?'Q2で、やりたいことを1つ以上選んでください。':'Q3で、いちばん早い予定の時期を選んでください。'));
   }
   $$('.survey-team-opt').forEach(function(b){
     b.setAttribute('aria-pressed','false');
@@ -656,23 +712,51 @@
       $('#surveyError').style.display='none'; updateSurveyState();
     });
   });
+  $$('.survey-time-opt').forEach(function(b){
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){
+      $$('.survey-time-opt').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false');});
+      b.classList.add('on'); b.setAttribute('aria-pressed','true'); surveyTime=b.getAttribute('data-time');
+      $('#surveyError').style.display='none'; updateSurveyState();
+    });
+  });
+  function quickCheckHtml(key){
+    var qs=QUICK_CHECK[key]||[];
+    return '<div class="quick-check" data-quick="'+key+'"><button type="button" class="quick-check-toggle" aria-expanded="false">追加2問で、次の確認を具体的にする</button>'
+      +'<div class="quick-check-body" hidden>'+qs.map(function(q,qi){
+        return '<div class="quick-question" data-q="'+qi+'"><b>'+(qi+1)+'. '+q.l+'</b><div class="quick-options">'
+          +q.o.map(function(o){return '<button type="button" class="quick-opt" data-value="'+o[0]+'" aria-pressed="false">'+o[1]+'</button>';}).join('')
+          +'</div></div>';
+      }).join('')+'<div class="quick-result" hidden aria-live="polite"></div></div></div>';
+  }
+  function quickResult(box){
+    var qs=$$('.quick-question',box); var values=[];
+    for(var i=0;i<qs.length;i++){var v=qs[i].getAttribute('data-answer');if(!v)return;values.push(v);}
+    var label,body;
+    if(values.indexOf('started')!==-1){label='先に相談';body='すでに動いている項目があります。追加で進める前に、今の状況を公式窓口または専門家へ伝えて確認しましょう。';}
+    else if(values.indexOf('no')!==-1||values.indexOf('large')!==-1){label='条件を先に確認';body='この回答だけでは候補から外れませんが、対象条件の確認を先に行うと無駄な準備を減らせます。';}
+    else if(values.indexOf('unsure')!==-1||values.indexOf('notyet')!==-1){label='情報をそろえて確認';body='まだ決まっていない情報があります。見積もり・契約状況・対象スタッフなどを整理してから公式窓口へ確認しましょう。';}
+    else{label=TIME_ACTION[surveyTime].label;body=TIME_ACTION[surveyTime].text;}
+    var result=$('.quick-result',box);result.innerHTML='<strong>'+label+'</strong>'+body;result.hidden=false;
+  }
   function recommendationItem(key,index){
     var g=STGRANTS[PURPOSE_INDEX[key]]; if(!g) return '';
     var next=key==='career'
       ? '正社員化の詳しい可能性は、この候補の下にある追加チェックで確認できます。'
       : PURPOSE_ADVICE[key].first;
-    return '<section class="recommendation-item"><div class="recommendation-rank">おすすめ候補 '+(index+1)+'</div>'
+    return '<section class="recommendation-item"><div class="recommendation-rank">おすすめ候補 '+(index+1)+' ・ '+TIME_ACTION[surveyTime].label+'</div>'
       +grantCard(g)
       +'<div class="recommendation-next"><b>まず確認すること</b>'+next+'</div>'
+      +quickCheckHtml(key)
       +(key==='career'?'<button type="button" class="btn secondary career-detail-btn">正社員化を詳しくチェックする</button>':'')
       +'</section>';
   }
   function showRecommendations(){
     var out=$('#purposeResult'); var input=$('#inputCard');
-    if(!surveyTeam||!surveyPurposes.length){
-      var msg=!surveyTeam?'Q1のお店の体制を選んでください。':'Q2で、やりたいことを1つ以上選んでください。';
+    if(!surveyTeam||!surveyPurposes.length||!surveyTime){
+      var msg=!surveyTeam?'Q1のお店の体制を選んでください。':(!surveyPurposes.length?'Q2で、やりたいことを1つ以上選んでください。':'Q3で、いちばん早い予定の時期を選んでください。');
       $('#surveyError').textContent=msg; $('#surveyError').style.display='block';
-      var q=!surveyTeam?$('#surveyTeamQuestion'):$('#surveyPurposeQuestion'); q.scrollIntoView({behavior:'smooth',block:'center'});
+      var q=!surveyTeam?$('#surveyTeamQuestion'):(!surveyPurposes.length?$('#surveyPurposeQuestion'):$('#surveyTimeQuestion')); q.scrollIntoView({behavior:'smooth',block:'center'});
       requestAnimationFrame(function(){var t=$('button',q);if(t)t.focus({preventScroll:true});});
       return;
     }
@@ -683,7 +767,7 @@
     var addedByTeam=recommended.length-surveyPurposes.length;
     input.hidden=true;
     out.innerHTML='<div class="recommendation-summary"><div class="form-kicker">アンケート結果</div><h2 id="purposeResultTitle" tabindex="-1">おすすめ候補が'+recommended.length+'件見つかりました</h2>'
-      +'<p>「'+TEAM_LABEL[surveyTeam]+'」と、選んだ'+surveyPurposes.length+'つの予定から候補をまとめました。'+(addedByTeam?'お店の体制に近い候補も加えています。':'')+'</p></div>'
+      +'<p>「'+TEAM_LABEL[surveyTeam]+'」「'+TIME_LABEL[surveyTime]+'」と、選んだ'+surveyPurposes.length+'つの予定から候補をまとめました。'+(addedByTeam?'お店の体制に近い候補も加えています。':'')+'</p></div>'
       +'<div class="recommendation-list">'+recommended.map(recommendationItem).join('')+'</div>'
       +'<div class="purpose-result-note"><b style="color:var(--navy)">ここではおすすめ候補まで。</b>アンケートだけで受給可否や金額を確定するものではありません。申請・契約・発注の前に、公式の最新情報と専門家への要件確認が安全です。</div>'
       +renderRegionFinder()
@@ -691,6 +775,12 @@
     out.hidden=false;
     out.scrollIntoView({behavior:'smooth',block:'start'});
     requestAnimationFrame(function(){ $('#purposeResultTitle').focus({preventScroll:true}); });
+    $$('.quick-check-toggle',out).forEach(function(toggle){
+      toggle.addEventListener('click',function(){var body=toggle.nextElementSibling;var open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',open?'false':'true');body.hidden=open;});
+    });
+    $$('.quick-opt',out).forEach(function(opt){
+      opt.addEventListener('click',function(){var q=opt.closest('.quick-question');$$('.quick-opt',q).forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false');});opt.classList.add('on');opt.setAttribute('aria-pressed','true');q.setAttribute('data-answer',opt.getAttribute('data-value'));quickResult(opt.closest('.quick-check'));});
+    });
     var detail=$('.career-detail-btn',out);
     if(detail) detail.addEventListener('click',function(){out.hidden=true;input.hidden=false;input.scrollIntoView({behavior:'smooth',block:'start'});requestAnimationFrame(function(){input.focus({preventScroll:true});});});
     $('#purposeResultBack').addEventListener('click',function(){out.hidden=true;goPurpose();});
