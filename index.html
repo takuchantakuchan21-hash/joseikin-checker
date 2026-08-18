@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>その助成金、うちはいける？チェッカー｜airchair</title>
+<style>
+  :root{
+    --navy:#123A8F; --blue:#2F6BFF; --blue-deep:#1f52e0; --blue-soft:#e9f0ff;
+    --ink:#1b2a4a; --sub:#5b6675; --line:#e4e9f2; --soft:#F4F7FC; --field:#f7f9fd; --card:#fff;
+    --green:#1f9d6b; --green-bg:#e7f6ef; --amber:#b9791a; --amber-bg:#fdf3e2; --red:#d0463b; --red-bg:#fbebe9;
+    --sh-sm:0 1px 2px rgba(18,58,143,.05), 0 2px 8px -3px rgba(18,58,143,.08);
+    --sh-blue:0 8px 20px -6px rgba(47,107,255,.42);
+    --sh-navy:0 12px 30px -10px rgba(18,58,143,.4);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    background:linear-gradient(180deg,#fafbfe 0%,#eef2fa 100%); background-attachment:fixed; min-height:100vh;
+    color:var(--ink); line-height:1.75; -webkit-font-smoothing:antialiased; font-feature-settings:"palt";}
+  .wrap{max-width:560px; margin:0 auto; padding:0 18px 72px;}
+  header{padding:24px 0 6px;}
+  .brand{font-weight:800; font-size:16px; color:var(--navy);}
+  .brand span{color:var(--blue);}
+  .hero{padding:16px 2px 22px;}
+  .hero h1{font-size:27px; line-height:1.38; margin:6px 0 12px; font-weight:800; letter-spacing:.01em; color:var(--navy);}
+  .hero h1 em{font-style:normal; color:var(--blue);}
+  .hero p{margin:0; color:var(--sub); font-size:14.5px; line-height:1.8;}
+  .hero p b{color:var(--navy);}
+  .btn{display:block; width:100%; border:none; cursor:pointer; font-family:inherit; font-weight:800; font-size:17px;
+    padding:16px; border-radius:14px; background:linear-gradient(180deg,var(--blue),var(--blue-deep)); color:#fff; letter-spacing:.02em;
+    box-shadow:var(--sh-blue); transition:filter .15s, transform .05s;}
+  .btn:hover{filter:brightness(1.05);} .btn:active{transform:translateY(1px);}
+  .btn.secondary{background:#fff; color:var(--blue); border:1.5px solid #c3d2f7; box-shadow:var(--sh-sm);}
+  .toggle{background:none; border:none; color:var(--blue); font-weight:700; font-size:13px; cursor:pointer; padding:7px 0; font-family:inherit;}
+  .lpwrap{display:none;}
+  .lp-block{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px; margin-bottom:12px; box-shadow:var(--sh-sm);}
+  .lp-block h2{font-size:18px; font-weight:800; margin:0 0 8px; line-height:1.5; color:var(--navy);}
+  .lp-block h2 em{font-style:normal; color:var(--blue);}
+  .lp-block p{margin:0; font-size:14px; color:var(--sub); line-height:1.85;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px; margin-bottom:16px; box-shadow:var(--sh-sm);}
+  .q{margin-bottom:22px;}
+  .q:last-of-type{margin-bottom:6px;}
+  .q .qlabel{font-weight:800; font-size:15px; color:var(--navy); margin-bottom:10px;}
+  .q .qhint{display:block; font-weight:400; color:var(--sub); font-size:12.5px; margin-top:3px; line-height:1.6;}
+  .opts{display:flex; flex-wrap:wrap; gap:8px;}
+  .opt{border:1.5px solid var(--line); background:#fff; color:var(--sub); font-family:inherit; font-size:14px; font-weight:700;
+    padding:11px 16px; border-radius:999px; cursor:pointer; transition:.15s;}
+  .opt:hover{border-color:#c7d0e0;}
+  .opt.on{background:var(--navy); color:#fff; border-color:var(--navy); box-shadow:0 3px 10px -2px rgba(18,58,143,.28);}
+  .subq{display:none; margin-top:14px; padding:14px 16px; border-left:4px solid var(--blue); background:var(--soft); border-radius:0 14px 14px 0;}
+  .subq.on{display:block;}
+  input[type=number]{font-size:17px; font-weight:700; padding:11px 14px; border:1.5px solid var(--line); border-radius:12px; background:var(--field); color:var(--ink); font-family:inherit; width:110px; -moz-appearance:textfield;}
+  input[type=number]:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-soft);}
+  input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  .inputrow{display:flex; align-items:center; gap:8px;}
+  .unit{color:var(--sub); font-size:14px; font-weight:600;}
+  select{width:100%; font-size:16px; padding:11px 14px; border:1.5px solid var(--line); border-radius:12px; background:var(--field) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235b6675' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>") no-repeat right 13px center; -webkit-appearance:none; appearance:none; color:var(--ink); font-family:inherit; cursor:pointer;}
+  .err{color:var(--red); font-size:13px; margin-top:10px; display:none; font-weight:700;}
+  /* result */
+  #result{display:none;}
+  .signal{position:relative; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px 22px 20px 24px; margin-bottom:16px; box-shadow:var(--sh-sm); overflow:hidden;}
+  .signal::before{content:''; position:absolute; left:0; top:0; bottom:0; width:7px; background:var(--sigc);}
+  .signal strong{display:block; font-size:20px; font-weight:800; line-height:1.3; color:var(--sigc);}
+  .signal span{font-size:13.5px; color:var(--sub); line-height:1.6; margin-top:3px; display:block;}
+  .sig-green{--sigc:var(--green);} .sig-amber{--sigc:var(--amber);} .sig-red{--sigc:var(--red);}
+  .amountcard{background:linear-gradient(135deg,#173f96,#123A8F); color:#fff; border-radius:18px; padding:20px 22px; margin-bottom:16px; box-shadow:var(--sh-navy);}
+  .amountcard h3{margin:0 0 6px; font-size:12px; font-weight:800; color:#a7bbe6; letter-spacing:.06em;}
+  .amountcard .amt{font-size:30px; font-weight:800; letter-spacing:-.02em; line-height:1.2;}
+  .amountcard .amt small{font-size:15px; font-weight:800;}
+  .amountcard .amtnote{font-size:12.5px; color:#c3d2f0; margin-top:8px; line-height:1.7;}
+  .block{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px; box-shadow:var(--sh-sm);}
+  .block h3{margin:0 0 10px; font-size:14px; font-weight:800; color:var(--navy);}
+  .block ul{margin:0; padding-left:20px;} .block ol{margin:0; padding-left:22px;}
+  .block li{font-size:14px; line-height:1.7; margin-bottom:8px; color:var(--ink);}
+  .block li:last-child{margin-bottom:0;}
+  .block li b{color:var(--navy);}
+  .ng{border-left:6px solid var(--amber);}
+  .steps{border-left:6px solid var(--blue);}
+  .expert{background:var(--soft); border:1px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .expert h3{margin:0 0 6px; font-size:15px; font-weight:800; color:var(--navy);}
+  .expert p{margin:0; font-size:13.5px; color:var(--sub); line-height:1.75;}
+  .cta{margin-top:4px;}
+  .foot{font-size:11px; color:#9aa4b2; text-align:center; margin-top:22px; line-height:1.7;}
+  .src{font-size:11px; color:#8b95a5; text-align:center; margin-top:6px; line-height:1.6;}
+  .src a{color:var(--blue);}
+  .freshbar{background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:10px 14px; margin-bottom:16px; font-size:12px; color:var(--sub); line-height:1.7;}
+  .freshbar b{color:var(--navy);}
+  .grantlist{display:flex; flex-direction:column; gap:10px;}
+  .grant{display:block; text-decoration:none; color:inherit; border:1px solid var(--line); border-radius:14px; padding:14px 16px; background:var(--field); transition:.15s;}
+  .grant:hover{border-color:var(--blue); background:var(--blue-soft);}
+  .grant .gtag{display:inline-block; font-size:11px; font-weight:800; color:var(--blue); background:var(--blue-soft); border-radius:999px; padding:3px 11px; margin-bottom:8px;}
+  .grant .gname{font-weight:800; color:var(--navy); font-size:15px;}
+  .grant .garrow{color:var(--blue); font-size:12px; font-weight:800;}
+  .grant .gdesc{font-size:13px; color:var(--ink); margin-top:4px; line-height:1.6;}
+  .grant .gfor{font-size:12px; color:var(--sub); margin-top:5px;}
+  #grantsBrowse{display:none; margin-top:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="brand">air<span>chair</span></div></header>
+
+  <div id="topArea">
+  <div class="hero">
+    <div style="font-size:13px;font-weight:800;color:var(--blue);margin-bottom:8px;letter-spacing:.01em">取れたはずのお金、毎年そのまま通り過ぎていませんか？</div>
+    <h1>その助成金、<em>うちは"いける"？</em></h1>
+    <p>非正規スタッフの正社員化など、<b>"どうせやること"に助成金を乗せるだけ</b>。国から1人最大80万円＋加算（中小）の制度も。<b>かんたんな質問で、うちのサロンで"今"使える可能性がわかります。</b></p>
+    <button type="button" class="btn" id="skipToCalc" style="margin-top:18px">▶ すぐに診断する</button>
+    <button type="button" class="toggle" id="lpToggle" style="display:block;margin-top:12px">そもそもどんな助成金？（30秒で読む）＋</button>
+  </div>
+
+  <div class="lpwrap" id="lpWrap">
+    <div class="lp-block">
+      <h2>正社員化を、<em>国が後押ししてくれる</em>制度です。</h2>
+      <p>「キャリアアップ助成金（正社員化コース）」は、契約社員・パートなどの非正規スタッフを正社員にした美容室に、国から助成金が出る制度。人を大事にする経営が、そのまま数十万円のリターンになります。</p>
+    </div>
+    <div class="lp-block">
+      <h2>もらえる目安は、<em>1人あたり数十万円</em>。</h2>
+      <p>中小企業なら、有期→正社員で1人最大80万円（条件により40万円）、無期→正社員で最大40万円。就業規則の整備などで加算も。1年度で最大20人まで（人数の上限や計画・管理者は<b>店舗＝事業所ごと</b>）。</p>
+    </div>
+    <div class="lp-block">
+      <h2>でも、<em>順番を1つ間違えると0円</em>です。</h2>
+      <p>一番多い失敗が「先に正社員にしてしまった」。この制度は<b>正社員にする前に、計画書を国へ出しておく</b>のが絶対条件。だから"やる前に"可能性と順番を知るのが大事です。</p>
+    </div>
+  </div>
+
+  <!-- INPUT -->
+  <div class="card" id="inputCard">
+    <div class="freshbar">この診断は<b>厚生労働省「令和8年度版」</b>の公式情報に基づく<b>目安</b>です。金額・要件は改正されるため、最新は公式でご確認ください。可否や金額を確定するものではありません。</div>
+    <div class="q">
+      <div class="qlabel">Q1. 今、雇用保険に入っているスタッフはいますか？<span class="qhint">社員・パート・アルバイト問わず。給与から雇用保険料を引いていれば加入しています（週20時間以上＋31日以上働く見込みなら通常は加入。昼間学生は原則対象外）。</span></div>
+      <div class="opts" data-q="employ">
+        <button type="button" class="opt" data-v="yes">いる</button>
+        <button type="button" class="opt" data-v="soon">これから雇う</button>
+        <button type="button" class="opt" data-v="solo">スタッフはいない（自分だけ）</button>
+        <button type="button" class="opt" data-v="family">夫婦・家族だけ（専従者）</button>
+        <button type="button" class="opt" data-v="none">業務委託・面貸しだけ（雇用なし）</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qlabel">Q2. 正社員にできそうな非正規スタッフ（契約社員・パート等）は？<span class="qhint">今いる、これから採る、いない のどれか。</span></div>
+      <div class="opts" data-q="target">
+        <button type="button" class="opt" data-v="have">今いる</button>
+        <button type="button" class="opt" data-v="future">これから採る予定</button>
+        <button type="button" class="opt" data-v="no">いない</button>
+      </div>
+      <div class="subq" id="subTarget">
+        <div style="font-weight:800;color:var(--blue);font-size:13.5px;margin-bottom:12px">↓ あと少しだけ教えてください（2つ）</div>
+        <div class="qlabel" style="font-size:14px">① その人を、もう正社員にしましたか？<span class="qhint">助成金は"正社員にする前"に計画書を国へ出すのが絶対条件。もう済んでいると、今回分は間に合わないことがあります。</span></div>
+        <div class="opts" data-q="done" style="margin-bottom:16px">
+          <button type="button" class="opt" data-v="notyet">まだ（これから）</button>
+          <button type="button" class="opt" data-v="done">もう正社員にした</button>
+        </div>
+        <div class="qlabel" style="font-size:14px">② その人の契約は？<span class="qhint">分からなければ「わからない」でOK（金額が変わります）。</span></div>
+        <div class="opts" data-q="term">
+          <button type="button" class="opt" data-v="fixed">契約期間あり</button>
+          <button type="button" class="opt" data-v="indef">期間の定めなし</button>
+          <button type="button" class="opt" data-v="unknown">わからない</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="q" id="countWrap" style="display:none">
+      <div class="qlabel">正社員にする予定は、何人ですか？<span class="qhint">だいたいでOK（1年度で最大20人まで／店舗＝事業所ごと）。複数いれば、その人数ぶんの目安も出します。</span></div>
+      <div class="inputrow"><input type="number" id="count" min="1" max="20" value="1" inputmode="numeric"><span class="unit">人</span></div>
+    </div>
+
+    <div class="q">
+      <div class="qlabel">Q3. 就業規則に「パート等を正社員に変える」ルールはありますか？<span class="qhint">なくても大丈夫（むしろ新しく作ると加算がつくことがあります）。分からなければ「ない・わからない」でOK。</span></div>
+      <div class="opts" data-q="rule">
+        <button type="button" class="opt" data-v="have">ある</button>
+        <button type="button" class="opt" data-v="none">ない・わからない</button>
+      </div>
+    </div>
+
+    <div class="err" id="err"></div>
+    <div style="height:8px"></div>
+    <button class="btn" id="calc">可能性を見る</button>
+  </div>
+
+  <button type="button" id="grantsToggle" style="display:block;width:100%;text-align:left;background:var(--soft);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-family:inherit;font-weight:800;color:var(--navy);font-size:14px;cursor:pointer;margin-top:6px;line-height:1.5">＋ ほかの助成金・補助金も見る<br><span style="font-weight:600;font-size:12px;color:var(--sub)">採用・賃上げ・育成・産休育休・集客・デジタル化 の困りごと別に</span></button>
+  <div id="grantsBrowse"></div>
+  </div>
+
+  <div id="result"></div>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s);};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+  var yen=function(n){return Math.round(n).toLocaleString('ja-JP');};
+  var ans={};
+
+  // LP toggle
+  $('#lpToggle').addEventListener('click',function(){
+    var w=$('#lpWrap'); var open=w.style.display!=='none' && w.style.display!=='';
+    // lpwrap default display:none via class; toggle inline
+    var shown=getComputedStyle(w).display!=='none';
+    w.style.display=shown?'none':'block';
+    this.textContent=shown?'そもそもどんな助成金？（30秒で読む）＋':'説明を閉じる −';
+  });
+  function goInput(){ $('#inputCard').scrollIntoView({behavior:'smooth',block:'start'}); }
+  $('#skipToCalc').addEventListener('click',goInput);
+
+  // option groups
+  $$('.opts').forEach(function(grp){
+    var key=grp.getAttribute('data-q');
+    $$('.opt',grp).forEach(function(b){
+      b.addEventListener('click',function(){
+        $$('.opt',grp).forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on'); ans[key]=b.getAttribute('data-v');
+        $('#err').style.display='none';
+        if(key==='target'){
+          // 対象を選び直したら、古いサブ回答（もう正社員にした/契約/勤続）をリセット（金額の誤りを防ぐ）
+          delete ans.done; delete ans.term; delete ans.years;
+          $$('#subTarget .opt').forEach(function(x){x.classList.remove('on');});
+          var isHave = ans.target==='have';
+          $('#subTarget').classList.toggle('on', isHave);
+          $('#countWrap').style.display = (ans.target==='have'||ans.target==='future') ? 'block' : 'none';
+          if(isHave){ setTimeout(function(){ $('#subTarget').scrollIntoView({behavior:'smooth',block:'nearest'}); }, 40); }
+        }
+      });
+    });
+  });
+
+  function money(str){ return str; }
+
+  function diagnose(){
+    var e=$('#err');
+    if(!ans.employ){ e.textContent='Q1を選んでください。'; e.style.display='block'; return null; }
+    e.style.display='none';
+
+    // 雇用がない＝対象外っぽい（Q1だけで判定・Q2/Q3は聞かない＝面貸し勢を早く逃がす）
+    if(ans.employ==='none'){
+      return {sig:'red', title:'今は対象外の可能性が高いです',
+        sub:'この助成金は「雇用保険に入っているスタッフ」がいる店が対象です。業務委託・面貸しだけの体制だと、今は土俵の外になりやすいです。',
+        why:'雇用保険に入っているスタッフがいない（委託・面貸しのみ）＝雇用がないと対象にならないためです。',
+        amount:null, ngTitle:'こんな制度なら使えるかもしれません',
+        ng:['将来スタッフを雇用（雇用保険加入）する形にすれば、雇用系の助成金の対象になり得ます。','集客の投資 → 小規模事業者持続化補助金／予約・会計のデジタル化 → デジタル化・AI導入補助金（下の一覧に）。'],
+        steps:null, expert:'雇用の形をどう設計するかは、社労士に一度相談すると失敗しません。',
+        grantsIntro:'あなたに近いのは、下の「集客に投資したい」「予約・会計をデジタル化したい」です。'};
+    }
+    // 一人サロン（スタッフなし）＝雇用系は対象外。"自分の店"向けの補助金へ逃がす
+    if(ans.employ==='solo'){
+      return {sig:'amber', title:'一人サロンは、雇用系の助成金は対象外になりやすいです',
+        sub:'キャリアアップ助成金は「雇っているスタッフを正社員にする」制度なので、自分だけのサロンは対象外になりやすいです。ただ、"自分の店"に使える制度は別にあります。',
+        why:'雇用しているスタッフがいない（自分だけ）＝雇用系の助成金の対象にならないためです。',
+        amount:null, ngTitle:'一人サロンでも使えるかもしれない制度',
+        ng:['集客の投資（HP・看板・チラシ・店舗改装の一部）→ 小規模事業者持続化補助金','予約・会計・レジのデジタル化 → デジタル化・AI導入補助金'],
+        steps:null, expert:'一人サロンでも使える補助金の要件は、下の一覧の公式サイトか専門家で確認できます。',
+        grantsIntro:'あなたに近いのは、下の「集客に投資したい」「予約・会計をデジタル化したい」です。'};
+    }
+
+    // 夫婦・家族だけ（専従者）＝雇用保険の対象外が一般的＝雇用系は対象外。補助金へ逃がす
+    if(ans.employ==='family'){
+      return {sig:'amber', title:'夫婦・家族だけのお店は、雇用系の助成金は対象外になりやすいです',
+        sub:'キャリアアップ助成金は「雇用保険に入っているスタッフ」を正社員にする制度です。ご家族（専従者）は雇用保険に入らないことが多く、その場合は対象外になります。ただ、"お店"に使える制度は別にあります。',
+        why:'ご家族（専従者）は雇用保険に入らないことが多く、雇用系の助成金の土俵に乗りにくいためです。',
+        amount:null, ngTitle:'夫婦・家族のお店でも使えるかもしれない制度',
+        ng:['集客の投資（HP・看板・チラシ・店舗改装の一部）→ 小規模事業者持続化補助金','予約・会計・レジのデジタル化 → デジタル化・AI導入補助金'],
+        steps:null, expert:'ご家族が雇用保険に入っているか等、個別の判断は社労士に確認すると確実です。',
+        grantsIntro:'あなたに近いのは、下の「集客に投資したい」「予約・会計をデジタル化したい」です。'};
+    }
+
+    if(!ans.target){ e.textContent='Q2を選んでください。'; e.style.display='block'; return null; }
+    if(ans.target==='have' && !ans.done){ e.textContent='Q2の続き（もう正社員にしたか）を選んでください。'; e.style.display='block'; return null; }
+    if(!ans.rule){ e.textContent='Q3を選んでください。'; e.style.display='block'; return null; }
+    e.style.display='none';
+    // 対象者がいない
+    if(ans.target==='no'){
+      return {sig:'amber', title:'対象者がいれば、使える可能性があります',
+        sub:'正社員にする"非正規スタッフ"がいて初めて使える制度です。今はいなくても、これから採用して正社員化する前提なら対象になり得ます。',
+        why:'今、正社員にできる非正規スタッフがいないためです（これから採れば対象になり得ます）。',
+        amount:null,
+        ng:['採用してすぐ正社員にするのではなく、まず有期・パート等で雇い、あとで正社員化する流れが基本です。','採る前に、この制度の順番（計画書を先に出す）を知っておくと取りこぼしません。'],
+        steps:defaultSteps(), expert:'「これから人を増やす」なら、採用前に一度、順番を社労士と確認するのがおすすめです。'};
+    }
+
+    // ここから：対象者が「今いる」or「これから採る」＝可能性あり
+    var future = (ans.target==='future' || ans.employ==='soon');
+    var termUnknown = (ans.term!=='indef' && ans.term!=='fixed');
+    var term = (ans.term==='indef') ? 'indef' : 'fixed'; // 未選択/わからない=有期前提（注記で無期の目安も出す）
+    var ruleNone = (ans.rule==='none');
+    var cEl = $('#count'); var count = Math.max(1, Math.min(20, (parseInt(cEl&&cEl.value,10)||1)));
+
+    // 基本額（中小・1人／加算は別扱い）：有期→通常40〜重点80、無期→通常20〜重点40。
+    // 重点支援対象者(a/b/c)の該当は年数だけでは決まらない（通算5年超の有期は無期みなし等）ので、
+    // 断定せず「通常額〜重点(満額)のレンジ＋重点該当は要件確認」に統一（社労士50人パネルG1/G10の指摘）。
+    var base = term==='indef' ? {juten:40, normal:20} : {juten:80, normal:40};
+    var bmin = base.normal, bmax = base.juten;
+    var addon = ruleNone ? 20 : 0; // 就業規則に転換制度を新設した場合の加算（令和8年度版の加算①・1事業所1回・条件付き）
+
+    var perText = yen(bmin*10000)+'〜<b>最大'+yen(bmax*10000)+'</b><small>円ほど</small>';
+    var totalText = (count>1) ? ('<div style="margin-top:10px;font-size:15px;color:#c3d2f0;line-height:1.6">'+count+'人ぶんの合計目安：<b style="color:#fff">'+yen(bmin*10000*count)+'〜最大'+yen(bmax*10000*count)+'円ほど</b> <span style="font-size:12px">（1人あたり×'+count+'人の目安）</span></div>') : '';
+    var addonLine = addon ? '＋ 就業規則に「正社員に変える制度」を新しく作れば、<b>最大20万円</b>の加算（1事業所につき1回・条件を満たした場合）' : '';
+    var jutenNote = ' 上限（重点支援対象）に当たるかは要件で決まります（例：3年以上の有期／最近正社員をしていない／ひとり親・派遣 など）。通算5年超の有期は"無期"あつかいになり、その場合は上の半分ほどが目安です。'+(termUnknown?' 契約が「わからない」の場合は有期の前提で表示しています（無期ならこの半分ほどが目安）。':'');
+
+    // もう正社員にした＝計画の事前提出が無いと今回分は間に合わない可能性（最大の損失発生源つぶし）
+    if(ans.target==='have' && ans.done==='done'){
+      return {sig:'amber', title:'もう正社員にしたなら、今回分は間に合わないかもしれません',
+        sub:'助成金は「正社員にする前日まで」に計画書を国へ出すのが絶対条件。事前に出していないと、今回の転換は対象外になりやすいです。',
+        why:'計画書を出す"前"に転換した分は、あとから遡って申請できないためです。',
+        amount:{text:'（本来の目安）'+perText, addon:addonLine, note:'ただし、<b>次に正社員化する人からは間に合います</b>。今から計画書を出しておけば、次の1人が対象に。'},
+        ng:[
+          '<b>正社員にする"前"に、計画書（キャリアアップ計画）を国へ出す</b>——ここが最大の分かれ目です。',
+          '正社員化して<b>6か月後の賃金を、その前の6か月より3%以上上げる</b>（対象は転換したその人の賃金）。',
+          '就業規則などに「正社員に変える制度」が<b>転換の前から</b>あること。',
+          '<b>非正規スタッフの待遇を下げる</b>（処遇低下）／<b>労働保険料の未納</b>／過去1年の労働関係法令違反があると受けられません。',
+          '<b>間に合わせようと書類の日付を遡って作るのは"不正受給"</b>＝全額返還＋延滞金＋2割の違約金＋事業所名の公表・5年間の受給停止。絶対にやめて、<b>次の1人を正しい順番で</b>狙ってください。'
+        ],
+        steps:defaultSteps(),
+        expert:'すでに転換済みの分に例外の余地がないか、次の1人を確実に間に合わせる段取りは、社労士に一度確認する価値があります。'};
+    }
+
+    var sig = future ? 'amber' : 'green';
+    var title = future ? '準備すれば、使える可能性があります' : '使える可能性があります（条件を満たせば）';
+    var sub = future
+      ? 'これから正社員化する前提なら、順番さえ守れば対象になり得ます。まず有期・パート等で採用し、あとで正社員化する流れが基本です（下の金額は有期前提の目安）。'
+      : '正社員にできる非正規スタッフがいて、雇用保険にも入っている＝"門前払い"ではありません。あとは「計画を先に出す・賃金3%増・就業規則」などの要件を満たせるかどうかです。';
+    var why = future
+      ? 'これから雇用・正社員化する前提だから（＝順番を守れば土俵に乗ります）。'
+      : '雇用保険に入っていて、正社員にできる非正規スタッフがいるから（＝土俵に乗っています。ここから要件確認へ）。';
+
+    return {sig:sig, title:title, sub:sub, why:why,
+      amount:{text:perText+totalText, addon:addonLine, note:'<b>中小企業</b>・1人あたりの<b>基本額の目安</b>（厚労省 令和8年度版）。'+jutenNote+' 賃金3%増などの要件を満たした場合の目安で、確定額ではありません。上限20人・計画・管理者は「事業所（店舗）単位」です（複数店舗は店舗ごとに要確認）。'},
+      ng:[
+        '<b>正社員にする"前"に、計画書（キャリアアップ計画）を国へ出す</b>のが絶対条件。先に正社員にしてしまうと0円です（一番多い失敗）。',
+        'まず<b>有期・パート等で6か月以上雇って</b>から正社員化するのが基本（採ってすぐの転換は対象外）。就業規則の「正社員に変える制度」は、<b>正社員にする前に</b>作っておくこと（後付け・日付の遡りは不可。無ければ新しく作れば加算のチャンス）。',
+        '正社員化して<b>6か月後の賃金を、その前の6か月より3%以上上げる</b>（対象は転換したその人の賃金。全員の昇給ではありません）。',
+        '<b>非正規スタッフの待遇を下げる</b>（処遇低下）／<b>労働保険料の未納</b>／過去1年の労働関係法令違反があると受けられません。',
+        '<b>書類の改ざん・日付の遡り作成・実地調査の拒否は"不正受給"</b>＝全額返還＋延滞金＋2割の違約金＋事業所名の公表・5年間の受給停止になります。'
+      ],
+      steps:defaultSteps(),
+      expert:'金額と可否は、お店の就業規則や雇用契約の中身で最終的に決まります。'+(ruleNone?'特に「就業規則の制度づくり」は落とし穴が多いので、':'')+'公開前に社労士へ要件確認するのが安全です。'};
+  }
+  function defaultSteps(){
+    return [
+      '雇用保険に加入し、「キャリアアップ管理者」を1人決める（＝ふつうはオーナー自身でOK）',
+      '就業規則などに「正社員に変える制度」を規定する（無ければ新しく作る＝加算のチャンス）',
+      '<b>正社員にする前日までに</b>「キャリアアップ計画」を管轄の労働局へ提出する',
+      '就業規則にそって正社員に転換し、6か月分の給与を払う（前の6か月より3%以上増）',
+      '給与を払った日の翌日から2か月以内に「支給申請」する'
+    ];
+  }
+
+  // 情報提供レイヤー：美容室が使えそうな制度（情報＝出してOK／金額・締切は公式へ＝断定しない）
+  var STGRANTS=[
+    {t:'スタッフを正社員にしたい',n:'キャリアアップ助成金',d:'非正規を正社員化・処遇改善したときの助成（正社員化／賃金規定改定／賞与・退職金 など全5コース）。目安：正社員化で1人 最大80万円＋加算（中小）。',f:'スタッフを正社員にしたい／待遇を整えたい',u:'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/part_haken/jigyounushi/career.html'},
+    {t:'賃上げと一緒に設備投資したい',n:'業務改善助成金',d:'事業場内の最低賃金を50円以上引き上げつつ設備投資すると、費用の一部を助成。目安：最大600万円（引上げ額・人数で変動）。<b>対象になるか</b>は"お店でいちばん低い時給"と<b>地域の最低賃金</b>の関係で決まり、<b>助成率</b>は引き上げ後の時給の水準で変わります（下の「地域」で確認先へ）。',f:'時給スタッフがいて、設備も更新したい',u:'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/03.html'},
+    {t:'スタッフを育てたい',n:'人材開発支援助成金',d:'スタッフの研修・技術教育の費用や、訓練中の賃金の一部を助成。目安：経費・賃金の一部。※要件を満たす訓練（外部講習・計画的な訓練など）が対象で、日々の店内OJTだけでは対象外になりやすい。',f:'アシスタント育成・研修に力を入れる',u:'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/shokugyounouryoku/training_employer/index.html'},
+    {t:'産休・育休に対応したい',n:'子ども・子育て両立支援等助成金',d:'育休の取得・職場復帰・仕事と家庭の両立支援の環境を整えたときの助成。目安：1件 数十万円規模。',f:'産休・育休のスタッフがいる',u:'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/kyufukin/index_00057.html'},
+    {t:'集客に投資したい',n:'小規模事業者持続化補助金',d:'販路開拓（HP・看板・チラシ・店舗改装の一部など）の費用を補助。目安：上限50万円〜（賃上げ等の特例で上乗せ・補助率2/3）。※公募回で変動。',f:'一人サロン・小規模で、集客に投資したい',u:'https://www.chusho.meti.go.jp/keiei/shokibo/jizoku/'},
+    {t:'予約・会計をデジタル化したい',n:'デジタル化・AI導入補助金（旧 IT導入補助金）',d:'予約システム・レジ・会計ソフトなどITの導入費を補助。目安：数十万〜450万円（枠による）。',f:'予約や会計をデジタル化したい',u:'https://it-shien.smrj.go.jp/'}
+  ];
+  var PREF=['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+  function prefBlock(p){
+    if(!p) return '';
+    return '<div style="margin-top:12px;font-size:13px;line-height:1.75">'
+      +'<div style="color:var(--sub);margin-bottom:7px"><b style="color:var(--navy)">'+p+'</b>の地域の一次情報（数字は年度で動くので、公式で最新をご確認ください）</div>'
+      +'<div style="display:flex;flex-direction:column;gap:7px">'
+      +'<a class="grant" style="padding:11px 14px" href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/minimumichiran/" target="_blank" rel="noopener"><div class="gname">'+p+'の地域別 最低賃金を確認 <span class="garrow">↗</span></div><div class="gfor">業務改善助成金の"対象になるか"は、この地域別最賃で決まります（毎年10月改定。助成率はお店の時給水準で別に決まります）</div></a>'
+      +'<a class="grant" style="padding:11px 14px" href="https://www.jgrants-portal.go.jp/" target="_blank" rel="noopener"><div class="gname">jGrantsで'+p+'の補助金を探す <span class="garrow">↗</span></div><div class="gfor">地域・業種・従業員数でしぼり込み（募集中を確認）</div></a>'
+      +'<a class="grant" style="padding:11px 14px" href="https://mirasapo-plus.go.jp/subsidy/" target="_blank" rel="noopener"><div class="gname">ミラサポplusで支援制度を探す <span class="garrow">↗</span></div><div class="gfor">自治体独自の制度も網羅</div></a>'
+      +'</div>'
+      +'<div style="color:var(--sub);font-size:12px;margin-top:8px">※ '+p+'・市区町村の<b>独自の助成金・補助金</b>もあります（「'+p+' 事業者 助成金」「お住まいの市区町村名 補助金」で検索）。</div>'
+      +'</div>';
+  }
+  function renderGrants(){
+    var opts='<option value="">選んでください</option>'+PREF.map(function(p){return '<option>'+p+'</option>';}).join('');
+    var region='<div style="background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px">'
+      +'<div style="font-weight:800;font-size:13.5px;color:var(--navy);margin-bottom:8px">お住まいの地域（都道府県）でも探せます（任意）</div>'
+      +'<select class="prefSel">'+opts+'</select>'
+      +'<div class="prefOut"></div></div>';
+    var cards=STGRANTS.map(function(g){
+      return '<a class="grant" href="'+g.u+'" target="_blank" rel="noopener"><div class="gtag">'+g.t+'</div><div class="gname">'+g.n+' <span class="garrow">公式サイト↗</span></div><div class="gdesc">'+g.d+'</div><div class="gfor">向く店：'+g.f+'</div></a>';
+    }).join('');
+    return '<div class="block"><h3>ほかに、うちが使えそうな助成金・補助金</h3>'
+      +'<div class="qhint" style="margin-bottom:12px;color:var(--sub)">「こんな困りごとは？」の<b>困りごと別に並べています</b>。目的の"情報提供"で、<b>金額・締切は公募回ごとに変わる</b>ため、詳しくは各公式サイトで最新をご確認ください（令和8年度時点の目安）。<br><b>補助金は後払い（一旦立替）・自己負担あり（補助率2/3など）・「交付決定の前」に発注/契約すると対象外</b>になります。必ず採択・交付決定の"あと"に発注してください。</div>'
+      +region
+      +'<div class="grantlist">'+cards+'</div></div>';
+  }
+  // 都道府県セレクトの変更で地域リンクを差し替え（結果内・メイン両方で効くよう委譲）
+  document.addEventListener('change',function(ev){
+    var s=ev.target;
+    if(s&&s.classList&&s.classList.contains('prefSel')){
+      var out=s.parentElement.querySelector('.prefOut');
+      if(out) out.innerHTML=prefBlock(s.value);
+    }
+  });
+  // メイン画面：情報を"見たい人だけ"開く
+  var GT_OPEN='＋ ほかの助成金・補助金も見る<br><span style="font-weight:600;font-size:12px;color:var(--sub)">採用・賃上げ・育成・産休育休・集客・デジタル化 の困りごと別に</span>';
+  $('#grantsToggle').addEventListener('click',function(){
+    var w=$('#grantsBrowse'); var shown=w.style.display!=='none' && w.style.display!=='';
+    if(!w.innerHTML) w.innerHTML=renderGrants();
+    w.style.display=shown?'none':'block';
+    this.innerHTML=shown?GT_OPEN:'− 閉じる';
+  });
+
+  var CHECK_Y=2026, CHECK_M=8, CHECK_D=17; // 情報の最終確認日（改正で数字が動くため、この日から一定期間で自動的に「要再確認」を出す）
+  function staleWarn(){
+    try{ var d=Math.floor((new Date()-new Date(CHECK_Y,CHECK_M-1,CHECK_D))/86400000);
+      if(d>200) return '<div style="background:var(--amber-bg);border:1px solid #f2e2c2;border-radius:12px;padding:11px 14px;margin-bottom:14px;font-size:12.5px;color:#8a5a12;line-height:1.65">※ 情報の最終確認日から約'+d+'日たっています。<b>助成金は毎年改正</b>されるため、金額・要件は必ず各公式サイトで最新をご確認ください。</div>';
+    }catch(e){}
+    return '';
+  }
+  function render(r){
+    var h=staleWarn()+'<div class="signal sig-'+r.sig+'"><strong>'+r.title+'</strong><span>'+r.sub+'</span></div>';
+    if(r.why){
+      h+='<div style="font-size:13px;color:var(--sub);background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:16px;line-height:1.7"><b style="color:var(--navy)">この判定の理由：</b>'+r.why+'</div>';
+    }
+    if(r.amount){
+      h+='<div class="amountcard"><h3>もらえる目安</h3><div class="amt">'+r.amount.text+'</div>'
+        +(r.amount.addon?'<div style="margin-top:12px;font-size:13px;color:#cdd9f2;line-height:1.65;border-top:1px solid rgba(255,255,255,.15);padding-top:12px">'+r.amount.addon+'</div>':'')
+        +'<div class="amtnote">'+r.amount.note+'</div></div>';
+      h+='<div style="font-size:13px;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-bottom:16px;line-height:1.7">※ 助成金は<b style="color:var(--navy)">後払い・原則一度きり</b>です（正社員化して給与を6か月ほど払った"あと"に入ります）。要件の<b style="color:var(--navy)">賃金3%増は"続くコスト"</b>です（昇給は毎月・助成金は一度）。だから<b style="color:var(--navy)">"どうせ正社員化する予定"の人に乗せる</b>のが基本です（新しい設備投資などは不要。ただし昇給ぶんのコストは続きます）。<br>※ 実際の受給には、要件を満たした証拠と実地調査への対応が必要です。</div>';
+    }
+    if(r.ng){
+      h+='<div class="block ng"><h3>'+(r.ngTitle||'ここを外すと0円（注意点）')+'</h3><ul>'+r.ng.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div>';
+    }
+    if(r.steps){
+      h+='<div class="block steps"><h3>今から整える順番</h3><ol>'+r.steps.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ol></div>';
+    }
+    h+='<div class="expert"><h3>次の一歩：要件を専門家に確認</h3><p>'+r.expert+' airchairでは、提携の社労士に「うちは要件を満たせるか」「NGを踏んでいないか」を確認できます（<b>相談したい方だけ</b>・無理な売り込みはしません）。</p></div>';
+    if(r.grantsIntro){ h+='<div style="font-size:13px;color:var(--navy);font-weight:700;margin:0 2px 8px">'+r.grantsIntro+'</div>'; }
+    h+=renderGrants();
+    h+='<div class="cta"><button class="btn secondary" id="backBtn">質問に戻る</button></div>';
+    h+='<div class="foot">※ これは可能性の目安です。受給できるかどうかを確定するものではありません。可否・金額は要件確認が必要です。</div>';
+    h+='<div class="src">出典：<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/part_haken/jigyounushi/career.html" target="_blank" rel="noopener">厚生労働省「キャリアアップ助成金のご案内（令和8年度版）」↗</a>（令和8年4月8日現在）／情報の最終確認日：2026-08-17。制度は改正されることがあります。<br>airchair</div>';
+    $('#result').innerHTML=h;
+    $('#result').style.display='block';
+    $('#topArea').style.display='none';
+    window.scrollTo({top:0,behavior:'smooth'});
+    $('#backBtn').addEventListener('click',function(){
+      $('#result').style.display='none'; $('#topArea').style.display='block'; window.scrollTo({top:0,behavior:'smooth'});
+    });
+  }
+
+  // 入力画面にも鮮度警告を出す（診断せず離脱する人にも「要再確認」を届ける・G8）
+  (function(){ var w=staleWarn(); if(w){ var ic=$('#inputCard'); if(ic) ic.insertAdjacentHTML('afterbegin', w); } })();
+
+  $('#calc').addEventListener('click',function(){
+    var r=diagnose(); if(r) render(r);
+  });
+})();
+</script>
+</body>
+</html>
